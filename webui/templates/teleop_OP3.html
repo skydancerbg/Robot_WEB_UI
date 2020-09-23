@@ -1,0 +1,269 @@
+{% extends "base.html" %}
+
+{% block nav_teleop %}class="active"{% endblock %}
+
+{% block title %}Teleop Walking Robot | {% endblock %}
+
+{% block content %}
+<div class="row">
+  
+  <div class="col-xs-4">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Camera</h3>
+      </div> 
+      <div class="panel-body">
+        <img class="img-responsive center-block" src="http://{{ baseurl }}:8080/stream?topic=/robotis_op3/camera/image_raw"/>
+                                                                                                    <!--/usb_cam/image_raw -->
+      </div> 
+    </div>
+  </div>
+
+  <div class="col-xs-6">
+    <div class="panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">OP3 Control</h3>
+      </div>
+      <div class="panel-body">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+          <div class="btn-group" role="group" aria-label="...">
+            <button id="init_button" type="button" class="btn btn-default" style="font-size:20px">Initail pose </button>
+          </div>
+          <ul class="nav nav-pills">
+            <br>
+            <li class="active"><a data-toggle="pill" href="#actionModule">Action Module</a> </li>
+            <li><a data-toggle="pill" href="#headControlModule">Head Control Module</a></li>
+            <li><a data-toggle="pill" href="#onlineWalkingModule">Online Walking Module</a></li>
+          </ul>
+        <div class="tab-content">
+          <div id="actionModule" class="tab-pane fade in active">
+            <br>
+            <table width="100%">
+              <p>
+                <div class="btn-group" role="group" aria-label="...">
+                  <button id="action_button" type="button" class="btn btn-default" style="font-size:24px">Activate Action module </button>
+                </div>
+              </p>
+              <p>
+                <div class="btn-group" role="group" aria-label="...">
+                  <button id="stand_button" type="button" class="btn btn-default" style="font-size:24px">Stand up </button>
+                  <button id="sit_button" type="button" class="btn btn-default" style="font-size:24px">Sit down </button>
+                  <button id="walk_button" type="button" class="btn btn-default" style="font-size:24px">Walk Ready </button>
+                  <button id="thankyou_button" type="button" class="btn btn-default" style="font-size:24px">Thank you </button>
+                  <button id="stop_button" type="button" class="btn btn-default" style="font-size:24px">Stop </button>
+                 </div>
+              </p>
+            </table>
+          </div>
+          <div id="headControlModule" class="tab-pane fade">
+            <br>
+            <table width="100%">
+              <p>
+                <div class="btn-group" role="group" aria-label="...">
+                  <button id="head_button" type="button" class="btn btn-default" style="font-size:24px">Activate Head module </button>
+                </div>
+              </p>
+              <tr>
+                <td colspan="3" align="center"> <button id="headUp_button" type="button" class="btn btn-default" style="font-size:32px">Head Up <i class="fa fa-arrow-up"></i></button></td>
+              </tr>
+              <tr>
+                <td align="center"> <button id="headLeft_button" type="button" class="btn btn-default" style="font-size:32px">Head Left <i class="fa fa-arrow-left"></i></button></td>
+                <td align="center"> <button id="headRight_button" type="button" class="btn btn-default" style="font-size:32px">Head Right <i class="fa fa-arrow-right"></i></button></td>
+              </tr>
+              <tr>
+                <td colspan="3" align="center"> <button id="headDown_button" type="button" class="btn btn-default" style="font-size:32px">Head down <i class="fa fa-arrow-down"></i></button></td>
+              </tr>
+            </table>
+          </div>
+          <div id="onlineWalkingModule" class="tab-pane fade">
+            <br>
+            <table widht="100%">
+              <p>
+                <div class="btn-group" role="group" aria-label="...">
+                  <button id="online_button" type="button" class="btn btn-default" style="font-size:24px">Activate Online-Walking module </button>
+                </div>
+              </p>
+              <tr>
+                <td align="center"> <button id="turnl_button" type="button" class="btn btn-default" style="font-size:24px">Turn Left </button></td>
+                <td align="center"> <button id="forward_button" type="button" class="btn btn-default" style="font-size:24px">Forward <i class="fa fa-arrow-up"></i></button></td>
+                <td align="center"> <button id="turnr_button" type="button" class="btn btn-default" style="font-size:24px">Turn Right </i></button></td>
+              </tr>
+              <tr>
+                <td align="center"> <button id="left_button" type="button" class="btn btn-default" style="font-size:24px">Left <i class="fa fa-arrow-left"></i></button></td>
+                <td align="center" style="width: 150px; font-size: 24px;"></td>
+                <td align="center"> <button id="right_button" type="button" class="btn btn-default" style="font-size:24px">Right <i class="fa fa-arrow-right"></i></button></td>
+              </tr>
+              <tr>
+                <td colspan="3" align="center"> <button id="backward_button" type="button" class="btn btn-default" style="font-size:24px">Backward <i class="fa fa-arrow-down"></i></button></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+           <!--
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">Waypoints</h3>
+            </div>
+            <div class="panel-body">
+              <p>
+                <select id="waypoints" class="form-control">
+                  <option value="-1" selected="selected">Select waypoint...</option>
+{% for point in waypoints %}
+                  <option value="{{ point.id }}">{{ point.name }}</option>
+{% endfor %}
+                </select>
+              </p>
+              <p><div class="btn-group" role="group" aria-label="..."><button id="go_button" type="button" class="btn btn-success">Go</button><button id="delete_button" type="button" class="btn btn-danger">Delete</button></div>&nbsp;&nbsp;&nbsp;<div class="btn-group" role="group" aria-label="..."><button id="save_button" type="button" class="btn btn-info">Save position</button></div></p>
+            </div>
+          </div>
+       
+          <div class="panel panel-info">
+            <div class="panel-heading">
+              <h3 class="panel-title">Info</h3>
+            </div>
+            <div class="panel-body">
+              <table class="col-xs-12">
+                <tr>
+                  <td>Battery voltage: <span id="battery_voltage">-</span> V</td>
+                  <td>Laptop battery: <span id="laptop_battery">-</td>
+                </tr>
+                <tr>
+                  <td>Wifi strength: <span id="wifi">-</span></td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Position: (<span id="position_x">0</span>, <span id="position_y">1</span>)</td>
+                  <td>Heading: <span id="heading">11</span>&deg;</td>           
+                </tr>
+              </table>
+            </div>
+          </div>
+          -->
+{% endblock %}
+
+{% block additional_javascripts %}
+        <script src="/static/roslibjs/easeljs.min.js"></script>
+        <script src="/static/roslibjs/eventemitter2.min.js"></script>
+        <script src="/static/roslibjs/roslib.min.js"></script>
+        <script src="/static/roslibjs/ros2d.js"></script>
+        <script src="/static/roslibjs/nav2d.js"></script>
+		    <script>
+
+    var ros = new ROSLIB.Ros();
+    ros.connect('ws://{{ baseurl }}:9090');
+
+    ros.on('connection', function() {
+       console.log('Connected to websocket server.');
+    });
+   
+     ros.on('error', function(error) {
+       console.log('Error connecting to websocket server: ', error);
+    });
+   
+     ros.on('close', function() {
+       console.log('Connection to websocket server closed.');
+    });
+
+    //initial position
+    var OP3Command = new ROSLIB.Topic({
+        ros: ros,
+        name: '/robotis/base/ini_pose',
+        messageType: 'std_msgs/String'
+    });
+
+    function sendOP3Command(command) {
+        var init_command = new ROSLIB.Message({
+            data: command
+        });
+        OP3Command.publish(init_command);
+
+    }
+
+    //controll module selection
+    var ModuleCommand = new ROSLIB.Topic({
+        ros: ros,
+        name: '/robotis/enable_ctrl_module',
+        messageType: 'std_msgs/String'
+    });
+
+    function sendModuleCommand(command) {
+        var init_command = new ROSLIB.Message({
+            data: command
+        });
+        ModuleCommand.publish(init_command);
+
+    }
+
+    //action control module controls
+    var ActionCommand = new ROSLIB.Topic({
+        ros: ros,
+        name: '/robotis/action/page_num',
+        messageType: 'std_msgs/Int32'
+    });
+
+    function sendActionCommand(command) {
+        var init_command = new ROSLIB.Message({
+            data: command
+        });
+        ActionCommand.publish(init_command);
+
+    }
+
+    //head control module controls
+    var HeadControl = new ROSLIB.Topic({
+      ros: ros,
+      name: '/robotis/head_control/set_joint_states',
+      messageType: 'sensor_msgs/JointState'
+    });
+
+    // pose = (pan/tilt)degree*3.1415/180;
+    // joint = head_pan, head_tilt
+
+    function sendHeadCommand(joint, pose) {
+      var head_motion = new ROSLIB.Message({
+        name: joint,
+        position: pose
+      });
+      HeadControl.publish(head_motion);
+    }
+
+
+    $(function() {
+      $('#init_button').click(function() {
+        sendOP3Command("ini_pose");
+      });
+      $('#online_button').click(function(){
+        sendModuleCommand("online_walking_module")
+      });
+      $('#action_button').click(function(){
+        sendModuleCommand("action_module")
+      });
+      $('#head_button').click(function(){
+        sendModuleCommand("head_control_module")
+      });
+      $('#stand_button').click(function(){
+        sendActionCommand(1)
+      });
+      $('#sit_button').click(function(){
+        sendActionCommand(15)
+      });
+      $('#thankyou_button').click(function(){
+        sendActionCommand(4)
+      });
+      $('#walk_button').click(function(){
+        sendActionCommand(9)
+      });
+      $('#walk_button').click(function(){
+        sendActionCommand(-1)
+      });
+    });
+  
+
+
+		    </script>
+{% endblock %}

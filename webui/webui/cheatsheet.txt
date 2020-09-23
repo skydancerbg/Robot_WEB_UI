@@ -1,0 +1,7 @@
+
+
+source ~/Robot_WEB_UI/env/bin/activate
+
+cd ~/Robot_WEB_UI/webui
+
+python3 manage.py runserver
