@@ -31,4 +31,6 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='index.html')),
     path('dashboard/', TemplateView.as_view(template_name='index.html')),
     path('teleop/', TemplateView.as_view(template_name='teleop.html')),
+    path('navigation/', TemplateView.as_view(template_name='navigation.html')),    
+    path('tst/', TemplateView.as_view(template_name='tst.html')),    
 ]

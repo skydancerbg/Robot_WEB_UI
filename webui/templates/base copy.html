@@ -46,7 +46,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li {% block nav_dashboard %}{% endblock %}>
+            <li class="nav-item active">
                 <!-- <a class="nav-link" href="index.html"> -->
                 <a class="nav-link" href="/dashboard/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -57,17 +57,14 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Teleop control -->
-            <li {% block nav_teleop %}{% endblock %}>
+            <li class="nav-item">
                 <a class="nav-link" href="/teleop/">
                     <i class="fas fa-fw fa-robot"></i>
                     <span>Telecontrol</span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Navigation control -->
-            <li {% block nav_navigation %}{% endblock %}>
+            <!-- Nav Item - Teleop control -->
+            <li class="nav-item">
                 <a class="nav-link" href="/navigation/">
                     <i class="fas fa-fw fa-map"></i>
                     <span>Navigation</span></a>

@@ -1,9 +1,7 @@
 {% extends 'topbar.html' %}
 
 {% load static %}
-{% block nav_dashboard %}class="nav-item"{% endblock %}
-{% block nav_teleop %}class="nav-item active"{% endblock %}
-{% block nav_navigation %}class="nav-item"{% endblock %}
+
 {% block page_content %}
 
 <!-- ################################################## -->
@@ -43,16 +41,15 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                            <!-- TODO: FIX BASE_URL issue -->
-                            <!-- <img class="img-responsive center-block"
+                    <!-- ################################################## -->
+                    <!-- TODO: FIX BASE_URL issue -->
+                    <!-- <img class="img-responsive center-block"
                                     src="http://{{ BASE_URL }}:8080/stream?topic=/robotis_op3/camera/image_raw" /> -->
+                    <img class="img-fluid center-block"
+                        src="http://127.0.0.1:8080/stream?topic=/robotis_op3/camera/image_raw" />
+                    <!-- ################################################## -->
 
-                            <!-- To set the properties of the ros web server video stream:  https://wiki.ros.org/web_video_server -->
-
-                            <!-- For Hitachi robot in servicesim use: -->
-                            <img class="img-fluid" src="http://127.0.0.1:8080/stream?topic=/archie/camera/image_raw" />
-                            <!-- For OP3 camera resize to:
-                            <img class="img-fluid" src="http://127.0.0.1:8080/stream?topic=/archie/camera/image_raw&width=640&height=480" /> -->                </div>
+                </div>
             </div>
         </div>
         <!-- ##########%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
@@ -267,8 +264,7 @@
 
     var my_listener = new ROSLIB.Topic({
         ros: ros,
-        // name: '/robotis/status',
-        name: '/archie/status',
+        name: '/robotis/status',
         messageType: 'robotis_controller_msgs/StatusMsg'
     });
 
@@ -291,8 +287,7 @@
     //initial position
     var OP3Command = new ROSLIB.Topic({
         ros: ros,
-        // name: '/robotis/base/ini_pose',
-        name: '/archie/base/ini_pose',
+        name: '/robotis/base/ini_pose',
         messageType: 'std_msgs/String'
     });
 
@@ -307,8 +302,7 @@
     //controll module selection
     var ModuleCommand = new ROSLIB.Topic({
         ros: ros,
-        // name: '/robotis/enable_ctrl_module',
-        name: '/archie/enable_ctrl_module',
+        name: '/robotis/enable_ctrl_module',
         messageType: 'std_msgs/String'
     });
 
@@ -323,8 +317,7 @@
     //action control module controls
     var ActionCommand = new ROSLIB.Topic({
         ros: ros,
-        // name: '/robotis/action/page_num',
-        name: '/archie/action/predefined_num',
+        name: '/robotis/action/page_num',
         messageType: 'std_msgs/Int32'
     });
 
@@ -339,15 +332,13 @@
     //head control module controls
     var HeadControl = new ROSLIB.Topic({
         ros: ros,
-        // name: '/robotis/head_control/set_joint_states',
-        name: '/archie/head_control/set_joint_states',
+        name: '/robotis/head_control/set_joint_states',
         messageType: 'sensor_msgs/JointState'
     });
 
-    
     // pose = (pan/tilt)degree*3.1415/180;
     // joint = head_pan, head_tilt
-    
+
     function sendHeadCommand(joint, pose) {
         var head_motion = new ROSLIB.Message({
             name: joint,
@@ -390,7 +381,7 @@
         $('#thankyou_btn').click(function () {
             statusmsg = 'predi';
             console.log('predi ' + statusmsg);
-            sendActionCommand(4);
+            sendActionCommand(1);
             statusmsg = 'sled';
             console.log("sled " + statusmsg);
             // statusmsg='Action_Finish';
