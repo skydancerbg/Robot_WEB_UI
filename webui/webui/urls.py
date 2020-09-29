@@ -28,9 +28,11 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', TemplateView.as_view(template_name='base.html')),
-    path('', TemplateView.as_view(template_name='index.html')),
-    path('dashboard/', TemplateView.as_view(template_name='index.html')),
+    path('', TemplateView.as_view(template_name='dashboard.html')),
+    path('dashboard/', TemplateView.as_view(template_name='dashboard.html')),
     path('teleop/', TemplateView.as_view(template_name='teleop.html')),
     path('navigation/', TemplateView.as_view(template_name='navigation.html')),    
-    path('tst/', TemplateView.as_view(template_name='tst.html')),    
+    path('smarthome/', TemplateView.as_view(template_name='smarthomeui.html')),      
+    path('healthdata/', TemplateView.as_view(template_name='healthdata.html')),      
+    path('tst/', TemplateView.as_view(template_name='tst.html')),
 ]

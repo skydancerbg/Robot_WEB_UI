@@ -1,21 +1,23 @@
 {% extends 'topbar.html' %}
+
+{% load static %}
+
 {% block nav_dashboard %}class="nav-item"{% endblock %}
-{% block nav_teleop %}class="nav-item"{% endblock %}
-{% block nav_navigation %}class="nav-item active"{% endblock %}
+{% block nav_teleop %}class="nav-item active"{% endblock %}
+{% block nav_navigation %}class="nav-item"{% endblock %}
 {% block nav_smarthome %}class="nav-item"{% endblock %}
 {% block nav_health %}class="nav-item"{% endblock %}
-{% load static %}
 
 {% block page_content %}
 
 <!-- ################################################## -->
 
 <!-- Begin Page Content -->
-<div id="navigation_page_content">
+<div id="teleop_page_content">
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-center text-gray-800">Navigation</h1>
+        <h1 class="h3 mb-0 text-center text-gray-800">Tele control</h1>
         <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
     </div>
@@ -45,14 +47,16 @@
                 </div>
                 <!-- Card Body -->
                 <div class="card-body">
-                    <!-- ################################################## -->
                     <!-- TODO: FIX BASE_URL issue -->
                     <!-- <img class="img-responsive center-block"
                                     src="http://{{ BASE_URL }}:8080/stream?topic=/robotis_op3/camera/image_raw" /> -->
-                    <img class="img-fluid center-block"
-                        src="http://127.0.0.1:8080/stream?topic=/robotis_op3/camera/image_raw" />
-                    <!-- ################################################## -->
 
+                    <!-- To set the properties of the ros web server video stream:  https://wiki.ros.org/web_video_server -->
+
+                    <!-- For Hitachi robot front camera in servicesim use: -->
+                    <img class="img-fluid" src="http://127.0.0.1:8080/stream?topic=/archie/camera/image_raw" />
+                    <!-- For OP3 camera resize to:
+                            <img class="img-fluid" src="http://127.0.0.1:8080/stream?topic=/archie/camera/image_raw&width=640&height=480" /> -->
                 </div>
             </div>
         </div>
@@ -63,6 +67,10 @@
                     <li class="nav-item">
                         <a class="nav-link active" id="overview-tab" href="#overview" data-toggle="tab" role="tab"
                             aria-controls="overview" aria-selected="true">#</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="example-tab" href="#example" data-toggle="tab" role="tab"
+                            aria-controls="example" aria-selected="false">Example</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="example-tab" href="#example" data-toggle="tab" role="tab"
@@ -171,6 +179,11 @@
                             <li class="nav-item">
                                 <a href="#walkctrl_tab" class="nav-link" role="tab" data-toggle="tab">Walk contol</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a href="#virtualjoystick_tab" class="nav-link" role="tab" data-toggle="tab">Joystick
+                                    control</a>
+                            </li>
                         </ul>
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade in active" id="manualctrl_tab">
@@ -226,18 +239,31 @@
                                 4
                             </div>
 
+                            <div role="tabpanel" class="tab-pane fade" id="virtualjoystick_tab">
+<br><br>
+kjdfsdkkjsdfkjsdkfj okjhokhdf oikadf sdfosk
+                                <div class="panel-body" id="joystick-panel">
+                                    <div id="joystick-container"></div>
+                                    <span id="result"></span>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- ################################################## -->
-
                     </div>
+
+                    <!-- ################################################## -->
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
 
-
+<!-- <script src={% static "webrtc/signaling_channel.js" %}></script>
+<script src={% static "webrtc/main.js" %}></script> -->
+<script src={% static "virtualjoystick/virtualjoystick.js" %}></script>
+<script src={% static "js/uiapp_virtualjoystick.js" %}></script>
 <script src={% static "roslibjs/easeljs.min.js" %}></script>
 <script src={% static "roslibjs/eventemitter2.min.js" %}></script>
 <script src={% static "roslibjs/roslib.min.js" %}></script>
@@ -266,9 +292,15 @@
 
     });
 
+// ######## VIRTUAL JOYSTICK #############
+
+
+// ######### END VIRTUAL JOYSTICK ##############
+
     var my_listener = new ROSLIB.Topic({
         ros: ros,
-        name: '/robotis/status',
+        // name: '/robotis/status',
+        name: '/archie/status',
         messageType: 'robotis_controller_msgs/StatusMsg'
     });
 
@@ -291,7 +323,8 @@
     //initial position
     var OP3Command = new ROSLIB.Topic({
         ros: ros,
-        name: '/robotis/base/ini_pose',
+        // name: '/robotis/base/ini_pose',
+        name: '/archie/base/ini_pose',
         messageType: 'std_msgs/String'
     });
 
@@ -306,7 +339,8 @@
     //controll module selection
     var ModuleCommand = new ROSLIB.Topic({
         ros: ros,
-        name: '/robotis/enable_ctrl_module',
+        // name: '/robotis/enable_ctrl_module',
+        name: '/archie/enable_ctrl_module',
         messageType: 'std_msgs/String'
     });
 
@@ -321,7 +355,8 @@
     //action control module controls
     var ActionCommand = new ROSLIB.Topic({
         ros: ros,
-        name: '/robotis/action/page_num',
+        // name: '/robotis/action/page_num',
+        name: '/archie/action/predefined_num',
         messageType: 'std_msgs/Int32'
     });
 
@@ -336,9 +371,11 @@
     //head control module controls
     var HeadControl = new ROSLIB.Topic({
         ros: ros,
-        name: '/robotis/head_control/set_joint_states',
+        // name: '/robotis/head_control/set_joint_states',
+        name: '/archie/head_control/set_joint_states',
         messageType: 'sensor_msgs/JointState'
     });
+
 
     // pose = (pan/tilt)degree*3.1415/180;
     // joint = head_pan, head_tilt
@@ -385,7 +422,7 @@
         $('#thankyou_btn').click(function () {
             statusmsg = 'predi';
             console.log('predi ' + statusmsg);
-            sendActionCommand(1);
+            sendActionCommand(4);
             statusmsg = 'sled';
             console.log("sled " + statusmsg);
             // statusmsg='Action_Finish';

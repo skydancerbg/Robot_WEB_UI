@@ -4,6 +4,10 @@
 {% block nav_dashboard %}class="nav-item active"{% endblock %}
 {% block nav_teleop %}class="nav-item"{% endblock %}
 {% block nav_navigation %}class="nav-item"{% endblock %}
+{% block nav_smarthome %}class="nav-item"{% endblock %}
+{% block nav_health %}class="nav-item"{% endblock %}
+
+
 {% block page_content %}
 
 <!-- ################################################## -->
@@ -132,7 +136,7 @@
 
                             <!-- To set the properties of the ros web server video stream:  https://wiki.ros.org/web_video_server -->
 
-                            <!-- For Hitachi robot in servicesim use: -->
+                            <!-- For Hitachi robot front camera in servicesim use: -->
                             <!-- <img class="img-fluid" src="http://127.0.0.1:8080/stream?topic=/archie/camera/image_raw" /> -->
                             <!-- For OP3 camera resize to: -->
                             <img class="img-fluid" src="http://127.0.0.1:8080/stream?topic=/archie/camera/image_raw&width=640&height=480" />

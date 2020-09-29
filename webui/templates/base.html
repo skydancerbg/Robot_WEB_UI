@@ -73,13 +73,35 @@
                     <span>Navigation</span></a>
             </li>
 
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Smart home page -->
+
+            <li {% block nav_smarthome %}{% endblock %}>
+                <a class="nav-link" href="/smarthome/">
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>Smarthome</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Smart home page -->
+
+            <li {% block nav_health %}{% endblock %}>
+                <a class="nav-link" href="/smarthome/">
+                    <i class="fas fa-fw fa-stethoscope"></i>
+                    <span>Your health data</span></a>
+            </li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Maintenance
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -87,7 +109,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
+                    <span>Settings</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">

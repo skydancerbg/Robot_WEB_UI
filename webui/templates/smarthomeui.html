@@ -1,0 +1,15 @@
+{% extends 'topbar.html' %}
+
+{% load static %}
+{% block nav_dashboard %}class="nav-item"{% endblock %}
+{% block nav_teleop %}class="nav-item"{% endblock %}
+{% block nav_navigation %}class="nav-item"{% endblock %}
+{% block nav_smarthome %}class="nav-item active"{% endblock %}
+{% block nav_health %}class="nav-item"{% endblock %}
+
+{% block page_content %}
+
+<div>
+<iframe src="http://192.168.1.100:8080/basicui/app" width="100%" height="800"></iframe>
+</div>
+{% endblock page_content %}
