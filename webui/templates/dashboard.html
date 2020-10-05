@@ -19,7 +19,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+            <h1 class="h3 mb-0 text-gray-800">DASHBOARD</h1>
             <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
         </div>
@@ -139,7 +139,11 @@
                             <!-- For Hitachi robot front camera in servicesim use: -->
                             <!-- <img class="img-fluid" src="http://127.0.0.1:8080/stream?topic=/archie/camera/image_raw" /> -->
                             <!-- For OP3 camera resize to: -->
-                            <img class="img-fluid" src="http://127.0.0.1:8080/stream?topic=/archie/camera/image_raw&width=640&height=480" />
+                            <!-- <img class="img-fluid" src="http://127.0.0.1:8080/stream?topic=/archie/camera/image_raw&width=640&height=480" /> -->
+
+                            <!-- Archie camera topic: -->
+                        <img class="img-fluid" src="http://{{ domainname }}:8080/stream?topic=/archie/camera/image_raw" />
+
                         </div>
                     </div>
                 </div>
@@ -149,7 +153,7 @@
                     <div class="card shadow mb-4">
                         <!-- Card Header - Dropdown -->
                         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">ROBOT LOCATION - HOUSE MAP</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">ROBOT LOCATION (FLOOR PLAN))</h6>
                             <!-- <div class="dropdown no-arrow">
                             <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">

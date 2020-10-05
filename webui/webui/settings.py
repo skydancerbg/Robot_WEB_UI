@@ -45,6 +45,8 @@ ALLOWED_HOSTS = []
 #     'django.contrib.staticfiles',
 # ]
 
+# https://studygyaan.com/django/django-best-practice-configuring-settings-file
+
 DEFAULT_APPS = [
      'django.contrib.admin',
      'django.contrib.auth',
@@ -60,6 +62,7 @@ THIRD_PARTY_APPS =[
 
 LOCAL_APPS =[
      # add local apps which you create using startapp
+     'uiapp',
 ]
 
  # Application definition
@@ -102,10 +105,11 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
 #### #### https://studygyaan.com/django/how-to-integrate-bootstrap-4-template-in-django       
         # 'DIRS': [BASE_DIR + '/templates/',], # <- - err TypeError: unsupported operand type(s) for +: 'PosixPath' and 'str' 
-        'DIRS': [BASE_DIR / 'templates'],   # <- This is the correct syntax
+        'DIRS': [BASE_DIR / 'templates'],   # <- This is the correct syntax for template folder in base directory!!
+
     #### Using:
 #### https://stackoverflow.com/questions/3038459/django-template-path
-        # 'DIRS': (PROJECT_PATH + '/templates/',),
+        # 'DIRS': (PROJECT_PATH + 'templates/',),
         
         'APP_DIRS': True,
         'OPTIONS': {
@@ -119,8 +123,12 @@ TEMPLATES = [
     },
 ]
 
-
-
+# TEMPLATE_LOADERS = [
+#     'django.template.loaders.filesystem.load_template_source',
+#     'django.template.loaders.app_directories.load_template_source',
+#     # 'django.template.loaders.eggs.load_template_source',
+# ]
+# 
 
 WSGI_APPLICATION = 'webui.wsgi.application'
 
@@ -135,6 +143,7 @@ WSGI_APPLICATION = 'webui.wsgi.application'
 #     }
 # }
 #######################
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -174,23 +183,30 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# STATICFILES_DIRS = (     
+# os.path.join(PROJECT_PATH, 'static'), 
+# ) 
+STATICFILES_DIRS = (     
+os.path.join(BASE_DIR, 'static'), 
+) 
+
+# STATIC_ROOT = os.path.join(PROJECT_PATH, 'staticfiles/')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+
+# MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 
 ################ ADITIONS TO THIS FILE:#######################
 
-# Loading from local_settings.py file
+# https://studygyaan.com/django/django-best-practice-configuring-settings-file
+# Loading from mariadb_settings.py file
 try:
-    from django_shop.local_settings import *
+    # from webui.local_settings import *
+    from webui.mariadb_settings import *
 except ImportError:
     pass
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (     
-os.path.join(BASE_DIR, 'static'), 
-) 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'

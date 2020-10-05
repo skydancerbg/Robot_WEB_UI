@@ -4,5 +4,7 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"python.pythonPath": "/home/robco/Robot_WEB_UI/env/bin/python"
+	}
 }
