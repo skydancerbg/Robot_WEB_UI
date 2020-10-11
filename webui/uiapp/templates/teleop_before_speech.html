@@ -87,9 +87,8 @@
                                     aria-controls="action" aria-selected="false">Action</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="btns-and-voice-tab" href="#btnsandvoicectrl" data-toggle="tab"
-                                    role="tab" aria-controls="btnsandvoicectrl" aria-selected="false">Voice and button
-                                    control</a>
+                                <a class="nav-link" id="example-tab" href="#example" data-toggle="tab" role="tab"
+                                    aria-controls="example" aria-selected="false">Example</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -144,45 +143,6 @@
                                 </div>
                             </div>
 
-                            <!-- voice and buttoncontrols tab content-->
-                            <div class="tab-pane fade" id="btnsandvoicectrl" role="tabpanel"
-                                aria-labelledby="btns-and-voice-tab">
-                                <h5 class="card-title">Voice commands and button controls</h5>
-                                <!-- <p class="card-text">...</p> -->
-                                <div class="text-center">
-                                    <p><strong>Press the disabled microphone icon </strong> and speak in English! <br>
-                                    </p>
-                                    <!-- <span class="input-group-addon btn btn-lg btn-outline-secondary btn-circle"
-                                        onclick="startSpeechRecognition();"> -->
-
-
-                                    <!-- <input type="text" name="voice_input" id="transcript" placeholder="Press the mic button!" />
-                                    <span onclick="startSpeechRecognition();">
-                                        <span id="mic_span"
-                                            class="input-group-addon btn btn-lg btn-outline-secondary btn-circle">
-                                            <i class="fas fa-microphone-alt-slash fa-2x"></i>
-                                        </span>
-                                    </span> -->
-
-
-
-                                    <!-- <div class="row" id="ros_connection_status____">
-                                            <button type="button" class="btn btn-lg btn-success btn-circle"><i
-                                                    class="fas fa-microphone-alt fa-2x"></i>
-                                            </button>
-                                        </div>
-                                        <br><br>
-                                        <div class="row" id="ros_connection_status_">
-                                            <button type="button" class="btn btn-lg btn-outline-secondary btn-circle"><i
-                                                    class="fas fa-microphone-alt-slash fa-2x"></i>
-                                            </button>
-                                        </div> -->
-
-
-                                    <br><br><br>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>
@@ -200,23 +160,21 @@
 <script src={% static "roslibjs/ros2d.js" %}></script>
 <script src={% static "roslibjs/nav2d.js" %}></script> -->
 
-<!-- In order to send the context data to the js file,
+    <!-- In order to send the context data to the js file,
     first we declare a variable,which to be loaded before the js file in the page html! -->
 
-<!-- <script>
+    <!-- <script>
         var domain_name = "{{ fqdn }}";
     </script>
     <script src={% static "virtualjoystick/virtualjoystick.js" %}></script>
     <script src={% static "uiapp/js/connect_ros.js" %}></script>
     <script src={% static "uiapp/js/load_virtualjoystick.js" %}></script> -->
 
-{% include "page_specific_scripts.html" %}
+    {% include "page_specific_scripts.html" %}
 
 
 
 <script>
-
-
     // var statusmsg = 'empty';
     // var ros = new ROSLIB.Ros();
     // // ros.connect('ws://127.0.0.1:9090');
@@ -343,7 +301,30 @@
 
     // // ######### END VIRTUAL JOYSTICK ##############
 
+    // ****** TEST *********
+    var my_listener = new ROSLIB.Topic({
+        ros: ros,
+        // name: '/robotis/status',
+        name: '/archie/status',
+        messageType: 'robotis_controller_msgs/StatusMsg'
+    });
 
+    my_listener.subscribe(function (message) {
+        // https://stackoverflow.com/questions/53676731/roslibjs-subscribe-to-topic-with-custom-messages
+        console.log("Poluchi message!!!!");
+        console.log(message.module_name);
+        console.log(message.status_msg);
+        console.log(message.type);
+        // console.log(m.data);
+        //console.log(`Received message on'  ${listener.name}: ${JSON.stringify(message)}`);
+        // document.getElementById("msg").innerHTML = m.data;
+
+        // document.getElementById("msg").innerHTML = message.status_msg;
+        
+        statusmsg = message.status_msg;
+
+    });
+    // ****** END TEST *********
 // ?????????????????????????????????????????????????????
 
     // // ####################################
@@ -575,7 +556,7 @@
     //     });
     // });
 
-
-</script>
+    
+    </script>
 
 {% endblock page_content %}
