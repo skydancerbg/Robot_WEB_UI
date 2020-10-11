@@ -1,0 +1,120 @@
+{% load static %}
+
+<!-- NB: This file is included at the bottom of the corresponding page using the include tag! -->
+
+<!-- !!Script to creates variables in order to pass the context data
+     (trough them) to our custom js files!! 
+     Here this can happen, because we render the page itself now,
+     the context varaibles did not exist previously (in the templates we extended)...-->
+<script>
+    var fqdn = "{{ fqdn }}"; //the fully qualified domain name
+    var page = "{{ page }}"; //the page name
+    console.log('page_specific_scripts: fqdn = ', fqdn)
+    console.log('page_specific_scripts: page = ', page)
+</script>
+
+<!-- !!! INSTEAD OF  -->
+<!-- <script src={% static "roslibjs/nav2d.js" %}></script> -->
+<!-- !!! IN ROS MELODIC USE THE MODIFIED BY STEFAN nav2djs -> nav2d_modified_for_tf2.js -->
+
+{% if page == 'dashboard' %}
+<script defer src={% static "roslibjs/ros2d.js" %}></script>
+<script defer src={% static "roslibjs/nav2d_modified_for_tf2.js" %}></script>
+<script defer src={% static "uiapp/js/connect_ros.js" %}></script>
+<script defer src={% static "uiapp/js/nav_map.js" %}></script>
+{% elif page == 'teleop' %}
+<script src={% static "virtualjoystick/virtualjoystick.js" %}></script>
+<script src={% static "uiapp/js/connect_ros.js" %}></script>
+<script src={% static "uiapp/js/load_virtualjoystick.js" %}></script>
+<script src={% static "uiapp/js/top_bar_statuses_update.js" %}></script>
+
+{% elif page == 'navigation' %}
+<!-- <script src={% static "webrtc/signaling_channel.js" %}></script>
+<script src={% static "webrtc/main.js" %}></script> -->
+<!-- <script src={% static "js/uiapp_virtualjoystick.js" %}></script> -->
+<script src={% static "roslibjs/easeljs.min.js" %}></script>
+<script src={% static "roslibjs/eventemitter2.min.js" %}></script>
+<script src={% static "roslibjs/roslib.min.js" %}></script>
+<script src={% static "roslibjs/ros2d.js" %}></script>
+
+<!-- !!! INSTEAD OF  -->
+<script>
+    var statusmsg = 'empty';
+    var ros = new ROSLIB.Ros();
+    ros.connect('ws://{{ fqdn }}:9090');
+    // ros.connect('ws://127.0.0.1:9090');
+
+    ros.on('connection', function () {
+        console.log('Connected to websocket server.');
+        document.getElementById("status").innerHTML = "Connected";
+    });
+
+    ros.on('error', function (error) {
+        console.log('Error connecting to websocket server: ', error);
+    });
+
+    ros.on('close', function () {
+        console.log('Connection to websocket server closed.');
+    });
+    ros.on('connection', function () {
+
+    });
+
+    // ###################################
+    </script>
+<!-- <script src={% static "roslibjs/nav2d.js" %}></script> -->
+<!-- !!! IN MELODIC USE THE MODIFIED BY STEFAN nav2djs -> nav2d_modified_for_tf2.js -->
+<script src={% static "roslibjs/nav2d_modified_for_tf2.js" %}></script>
+
+
+
+
+
+
+
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<!-- <script defer src={% static "roslibjs/ros2d.js" %}></script> -->
+<!-- <script src={% static "roslibjs/nav2d_modified_for_tf2.js" %}></script> -->
+<!-- <script src={% static "uiapp/js/connect_ros.js" %}></script>
+<script> console.log('WAIT FOR ROS TO LOAD');</script> -->
+<!-- <script>
+    var statusmsg = 'empty';
+    var ros = new ROSLIB.Ros();
+    ros.connect('ws://{{ fqdn }}:9090');
+    // ros.connect('ws://127.0.0.1:9090');
+
+    ros.on('connection', function () {
+        console.log('Connected to websocket server.');
+        document.getElementById("status").innerHTML = "Connected";
+    });
+
+    ros.on('error', function (error) {
+        console.log('Error connecting to websocket server: ', error);
+    });
+
+    ros.on('close', function () {
+        console.log('Connection to websocket server closed.');
+    });
+    ros.on('connection', function () {
+
+    });
+</script>
+<script src={% static "uiapp/js/nav_tst_top.js" %}></script> -->
+
+<!-- ######## WAYPOINT SELECTION MENU RELATED ############# -->
+<!-- <script>
+    //    We can only render context data inside the page html!!!
+    //    In order to use the context data in the js file,
+    //    first we declare a variable in this page script and fill it with the context data,
+    //    and only then we load the js file which will use that data!
+    var waypoints = new Array();
+
+    {%for point in waypoints %}
+    waypoints[{{ point.id }}] = { 'x' : { { point.x } }, 'y' : { { point.y } }, 'theta' : { { point.theta } } };
+    {% endfor %}
+</script>
+
+<script src={% static "uiapp/js/nav_waypoint_menu.js" %}></script>{% else %} -->
+
+{% endif %}

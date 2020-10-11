@@ -1,4 +1,4 @@
-{% extends 'topbar.html' %}
+{% extends 'topbar_dashboard.html' %}
 
 {% load static %}
 {% block nav_dashboard %}class="nav-item active"{% endblock %}
@@ -6,7 +6,7 @@
 {% block nav_navigation %}class="nav-item"{% endblock %}
 {% block nav_smarthome %}class="nav-item"{% endblock %}
 {% block nav_health %}class="nav-item"{% endblock %}
-
+{% block nav_tasks %}class="nav-item"{% endblock %}
 
 {% block page_content %}
 
@@ -16,7 +16,6 @@
 <div id="dashboard_page_content">
     <!-- Begin Page Content -->
     <div class="container-fluid">
-
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">DASHBOARD</h1>
@@ -38,7 +37,8 @@
                                 <div class="h5 mb-0 font-weight-bold" style="color:green;">OK</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-thumbs-up fa-2x  " style="color:rgb(123, 230, 123);"></i>
+                                <!-- <i class="fas fa-thumbs-up fa-2x  " style="color:rgb(123, 230, 123);"></i> -->
+                                <i class="fas fa-thumbs-up fa-2x  " style="color:#ffbb33;"></i>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                                 <div class="h5 mb-0 font-weight-bold text-danger">25%</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-battery-quarter fa-2x" style="color:red;"></i>
+                                <i class="fas fa-battery-quarter fa-2x" style="color:red;"></i> 
                             </div>
                         </div>
                     </div>
@@ -142,7 +142,8 @@
                             <!-- <img class="img-fluid" src="http://127.0.0.1:8080/stream?topic=/archie/camera/image_raw&width=640&height=480" /> -->
 
                             <!-- Archie camera topic: -->
-                        <img class="img-fluid" src="http://{{ domainname }}:8080/stream?topic=/archie/camera/image_raw" />
+                            <img class="img-fluid"
+                                src="http://{{ fqdn }}:8080/stream?topic=/archie/camera/image_raw" />
 
                         </div>
                     </div>
@@ -170,9 +171,14 @@
                         </div> -->
                         </div>
                         <!-- Card Body -->
-                        <div class="card-body">
+                        <!-- <div class="card-body">
                             <img class="img-fluid" src="{% static "img/map.png" %}" alt="House map image">
+                        </div> -->
+                        <div class="card-body" id="map-panel">
+                            <div id="nav"></div>
+                            <!-- ############################################################################ -->
                         </div>
+
                     </div>
                 </div>
 
@@ -410,6 +416,14 @@
         <!-- /.container-fluid -->
 
     </div>
-
     <!-- END Dashboard -->
+    {% include "page_specific_scripts.html" %}
+    
+    <!-- In order to send the context data to the js file,
+    first we declare a variable,which to be loaded before the js file in the page html! -->
+    <!-- <script>
+        var domain_name = "{{ fqdn }}";
+    </script>
+    <script src={% static "uiapp/js/connect_ros.js" %}></script>
+    <script src={% static "uiapp/js/nav_map.js" %}></script> -->
     {% endblock page_content %}

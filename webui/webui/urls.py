@@ -29,7 +29,7 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('uiapp.urls')),
-
+    # path('', include('rosweb.urls')),
     # path('', TemplateView.as_view(template_name='dashboard.html')),
     # path('dashboard/', TemplateView.as_view(template_name='dashboard.html')),    
 ]

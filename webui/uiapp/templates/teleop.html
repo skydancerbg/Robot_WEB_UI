@@ -1,0 +1,562 @@
+{% extends 'topbar.html' %}
+
+{% load static %}
+
+{% block nav_dashboard %}class="nav-item"{% endblock %}
+{% block nav_teleop %}class="nav-item active"{% endblock %}
+{% block nav_navigation %}class="nav-item"{% endblock %}
+{% block nav_smarthome %}class="nav-item"{% endblock %}
+{% block nav_health %}class="nav-item"{% endblock %}
+{% block nav_tasks %}class="nav-item"{% endblock %}
+{% block page_content %}
+
+<!-- ################################################## -->
+
+<!-- Begin Page Content -->
+<div id="teleop_page_content">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-center text-gray-800">TELECONTROL</h1>
+            <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+        </div>
+
+        <!-- <div id="status"></div> -->
+
+        <div class="row">
+
+            <!-- Head camera column -->
+            <div class="col-xl-4 col-lg-5">
+                <!-- <div class="col-xl-3 col-lg-4"> -->
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">HEAD CAMERA</h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-header">Dropdown Header:</div>
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <!-- TODO: FIX BASE_URL issue -->
+                        <!-- <img class="img-responsive center-block"
+                                    src="http://{{ BASE_URL }}:8080/stream?topic=/robotis_op3/camera/image_raw" /> -->
+
+                        <!-- To set the properties of the ros web server video stream:  https://wiki.ros.org/web_video_server -->
+
+                        <!-- For Hitachi robot front camera in servicesim use: -->
+                        <!-- <img class="img-fluid" src="http://127.0.0.1:8080/stream?topic=/archie/camera/image_raw" /> -->
+                        <!-- For OP3 camera resize to:
+                            <img class="img-fluid" src="http://127.0.0.1:8080/stream?topic=/archie/camera/image_raw&width=640&height=480" /> -->
+
+                        <!-- Archie camera topic: -->
+                        <img class="img-fluid" src="http://{{ fqdn }}:8080/stream?topic=/archie/camera/image_raw" />
+                    </div>
+                </div>
+            </div>
+            <!-- ##########%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+            <!-- <div class="card" shadow mb-4> -->
+            <!-- <div class="col-sm-6"> -->
+            <div class="col-xl-6 col-lg-7">
+                <div class="card" shadow mb-4>
+                    <div class="card-header border-bottom">
+                        <ul class="nav nav-tabs card-header-tabs" id="controlsCardTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link  active" id="virtualjoystick-tab" href="#virtualjoystick"
+                                    data-toggle="tab" role="tab" aria-controls="virtualjoystick"
+                                    aria-selected="true">Virtual joystick</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="overview-tab" href="#overview" data-toggle="tab" role="tab"
+                                    aria-controls="overview" aria-selected="false">#</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="actionctrl-tab" href="#actionctrl" data-toggle="tab" role="tab"
+                                    aria-controls="action" aria-selected="false">Action</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="example-tab" href="#example" data-toggle="tab" role="tab"
+                                    aria-controls="example" aria-selected="false">Example</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- virtual joystick tab content-->
+                    <div class="card-body">
+                        <div class="tab-content" id="cardTabContent">
+                            <div class="tab-pane fade  show active" id="virtualjoystick" role="tabpanel"
+                                aria-labelledby="virtualjoystick-tab">
+                                <h5 class="card-title">Virtual joystick</h5>
+                                <div class="text-center">
+                                    <!-- <divclass="mw-100" id="joystick-container" ></div> -->
+                                    <!-- <div class="mw-100" id="joystick-container" style="background:#7aee2d"></div> -->
+                                    <!-- <div id="joystick-container" style="height:640px; width:640px; background:#7aee2d"></div> -->
+                                    <!-- <div id="joystick_container" class="w-100"> -->
+                                    <div id="joystick_container">
+                                    </div>
+                                    <span id="result"></span>
+                                    <br><br><br>
+                                </div>
+                            </div>
+                            <!-- <div class="tab-pane fade" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                                <h2 class="card-title text-primary text-center font-weight-bold">Manual control</h2>
+                                <p class="card-text text-center">Choose a tab...</p>
+                            </div> -->
+                            <!-- action tab content-->
+                            <div class="tab-pane fade" id="actionctrl" role="tabpanel" aria-labelledby="actionctrl-tab">
+                                <h5 class="card-title">Action</h5>
+                                <!-- <p class="card-text">...</p> -->
+                                <div class="text-center">
+                                    <button id="stand_btn" type="button" class="btn btn-outline-primary"
+                                        style="font-size:24px">Stand
+                                        up </button>
+                                    <button id="sit_btn" type="button" class="btn btn-outline-primary"
+                                        style="font-size:24px">Sit
+                                        down </button>
+                                    <br><br>
+                                    <button id="thankyou_btn" type="button" class="btn btn-outline-primary"
+                                        style="font-size:24px">Thank
+                                        you </button>
+                                    <button id="oops_btn" type="button" class="btn btn-outline-primary"
+                                        style="font-size:24px">Oops... </button>
+                                    <button id="walk_btn" type="button" class="btn btn-outline-primary"
+                                        style="font-size:24px">Walk
+                                        Ready </button>
+                                    <button id="stop_btn" type="button" class="btn btn-outline-primary"
+                                        style="font-size:24px">Stop
+                                    </button>
+                                    <br><br><br>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <script src={% static "webrtc/signaling_channel.js" %}></script>
+<script src={% static "webrtc/main.js" %}></script> -->
+
+<!-- <script src={% static "virtualjoystick/virtualjoystick.js" %}></script>
+<script src={% static "roslibjs/easeljs.min.js" %}></script>
+<script src={% static "roslibjs/eventemitter2.min.js" %}></script>
+<script src={% static "roslibjs/roslib.min.js" %}></script>
+<script src={% static "roslibjs/ros2d.js" %}></script>
+<script src={% static "roslibjs/nav2d.js" %}></script> -->
+
+    <!-- In order to send the context data to the js file,
+    first we declare a variable,which to be loaded before the js file in the page html! -->
+
+    <!-- <script>
+        var domain_name = "{{ fqdn }}";
+    </script>
+    <script src={% static "virtualjoystick/virtualjoystick.js" %}></script>
+    <script src={% static "uiapp/js/connect_ros.js" %}></script>
+    <script src={% static "uiapp/js/load_virtualjoystick.js" %}></script> -->
+
+    {% include "page_specific_scripts.html" %}
+
+
+
+<script>
+    // var statusmsg = 'empty';
+    // var ros = new ROSLIB.Ros();
+    // // ros.connect('ws://127.0.0.1:9090');
+    // ros.connect('ws://{{ fqdn }}:9090');
+
+    // ros.on('connection', function () {
+    //     console.log('Connected to websocket server.');
+    //     // document.getElementById("status").innerHTML = "Connected";
+    //     document.getElementById("ros_connection_status").innerHTML = "<button type='button' class='btn btn-success btn-box'><i class='fas  fa-link fa-2x'></i></button>&nbsp;&nbsp;<h6>Connected</h6>";
+    //     document.getElementById("robot_status").innerHTML = '<i class="fas fa-robot fa-2x" style="color:rgb(123, 230, 123);"></i>'
+    //     document.getElementById("battery_status").innerHTML = '<i class="fas fa-battery-quarter fa-2x" style="color:red;"></i>'
+    //     document.getElementById("wifi_status").innerHTML = '<i class="fas fa-wifi fa-2x" style="color:rgb(123, 230, 123);"></i>'
+    //     document.getElementById("smarthome_status").innerHTML = '<i class="fas fa-home fa-2x  " style="color:rgb(123, 230, 123);" ></i>'
+    // });
+
+    // ros.on('error', function (error) {
+    //     console.log('Error connecting to websocket server: ', error);
+    // });
+
+    // ros.on('close', function () {
+    //     console.log('Connection to websocket server closed.');
+    // });
+    // ros.on('connection', function () {
+
+    // });
+
+    // // ###################################
+    // // ######## VIRTUAL JOYSTICK RELATED #############
+
+    // var cmdVel = new ROSLIB.Topic({
+    //     ros: ros,
+    //     // name: '/cmd_vel',
+    //     // name: '/servicebot/cmd_vel',
+    //     name: '/cmd_vel_mux/input/teleop',
+    //     messageType: 'geometry_msgs/Twist'
+    // });
+
+    // var deadzone = 10;
+
+    // var stop_sent = false;
+
+    // function send_command(dx, dy) {
+    //     if (dx < deadzone && dx > -deadzone)
+    //         dx = 0;
+
+    //     if (dy < deadzone && dy > -deadzone)
+    //         dy = 0;
+
+    //     if (dx == 0 && dy == 0) {
+    //         if (stop_sent)
+    //             return;
+    //         else
+    //             stop_sent = true;
+    //     } else {
+    //         stop_sent = false;
+    //     }
+
+    //     var twist = new ROSLIB.Message({
+    //         linear: {
+    //             x: dy / 100.0,
+    //             y: 0,
+    //             z: 0
+    //         },
+    //         angular: {
+    //             x: 0,
+    //             y: 0,
+    //             z: dx / 100.0
+    //         }
+    //     });
+    //     console.log("publish twist");
+    //     cmdVel.publish(twist);
+    // }
+
+    // function sendButtonCommand(dx, dz) {
+    //     var twist = new ROSLIB.Message({
+    //         linear: {
+    //             x: dx,
+    //             y: 0,
+    //             z: 0
+    //         },
+    //         angular: {
+    //             x: 0,
+    //             y: 0,
+    //             z: dz
+    //         }
+    //     });
+    //     console.log("publish bez timeout ");
+    //     cmdVel.publish(twist);
+
+    //     setTimeout(function () {
+    //         var twist = new ROSLIB.Message({
+    //             linear: {
+    //                 x: 0,
+    //                 y: 0,
+    //                 z: 0
+    //             },
+    //             angular: {
+    //                 x: 0,
+    //                 y: 0,
+    //                 z: 0
+    //             }
+    //         });
+    //         console.log("publish timeouttttt");
+    //         cmdVel.publish(twist);
+    //     }, 2000); // duration of movement
+    // }
+
+
+    // setInterval(function () {
+    //     var outputEl = document.getElementById('result');
+
+    //     var dx = joystick.deltaXpercent();
+    //     var dy = joystick.deltaYpercent();
+
+    //     send_command(-dx, -dy);
+
+    //     outputEl.innerHTML = ' dx:' + dx + '%' +
+    //         ' dy:' + dy + '%' +
+    //         (joystick.right() ? ' right' : '') +
+    //         (joystick.up() ? ' up' : '') +
+    //         (joystick.left() ? ' left' : '') +
+    //         (joystick.down() ? ' down' : '')
+    // }, 1 / 30 * 1000);
+
+    // // ######### END VIRTUAL JOYSTICK ##############
+
+    // ****** TEST *********
+    var my_listener = new ROSLIB.Topic({
+        ros: ros,
+        // name: '/robotis/status',
+        name: '/archie/status',
+        messageType: 'robotis_controller_msgs/StatusMsg'
+    });
+
+    my_listener.subscribe(function (message) {
+        // https://stackoverflow.com/questions/53676731/roslibjs-subscribe-to-topic-with-custom-messages
+        console.log("Poluchi message!!!!");
+        console.log(message.module_name);
+        console.log(message.status_msg);
+        console.log(message.type);
+        // console.log(m.data);
+        //console.log(`Received message on'  ${listener.name}: ${JSON.stringify(message)}`);
+        // document.getElementById("msg").innerHTML = m.data;
+
+        // document.getElementById("msg").innerHTML = message.status_msg;
+        
+        statusmsg = message.status_msg;
+
+    });
+    // ****** END TEST *********
+// ?????????????????????????????????????????????????????
+
+    // // ####################################
+    // //initial position
+    // var OP3Command = new ROSLIB.Topic({
+    //     ros: ros,
+    //     // name: '/robotis/base/ini_pose',
+    //     name: '/archie/base/ini_pose',
+    //     messageType: 'std_msgs/String'
+    // });
+
+    // function sendOP3Command(command) {
+    //     var init_command = new ROSLIB.Message({
+    //         data: command
+    //     });
+    //     OP3Command.publish(init_command);
+
+    // }
+
+    // //controll module selection
+    // var ModuleCommand = new ROSLIB.Topic({
+    //     ros: ros,
+    //     // name: '/robotis/enable_ctrl_module',
+    //     name: '/archie/enable_ctrl_module',
+    //     messageType: 'std_msgs/String'
+    // });
+
+    // function sendModuleCommand(command) {
+    //     var init_command = new ROSLIB.Message({
+    //         data: command
+    //     });
+    //     ModuleCommand.publish(init_command);
+
+    // }
+
+    // //action control module controls
+    // var ActionCommand = new ROSLIB.Topic({
+    //     ros: ros,
+    //     // name: '/robotis/action/page_num',
+    //     name: '/archie/action/predefined_num',
+    //     messageType: 'std_msgs/Int32'
+    // });
+
+    // function sendActionCommand(command) {
+    //     var init_command = new ROSLIB.Message({
+    //         data: command
+    //     });
+    //     ActionCommand.publish(init_command);
+
+    // }
+
+    // //head control module controls
+    // var HeadControl = new ROSLIB.Topic({
+    //     ros: ros,
+    //     // name: '/robotis/head_control/set_joint_states',
+    //     name: '/archie/head_control/set_joint_states',
+    //     messageType: 'sensor_msgs/JointState'
+    // });
+
+
+    // // pose = (pan/tilt)degree*3.1415/180;
+    // // joint = head_pan, head_tilt
+
+    // function sendHeadCommand(joint, pose) {
+    //     var head_motion = new ROSLIB.Message({
+    //         name: joint,
+    //         position: pose
+    //     });
+    //     HeadControl.publish(head_motion);
+    // }
+    // function myFunction() {
+    //     sendActionCommand(15);
+    //     console.log('sit_button');
+    // }
+// ????????????????????????????????????????????????????????????????????????/
+    // var joystick = null;
+
+    // function createjoystick() {
+    //     var jpw = $('#virtualjoystick').width();
+    //     console.log("jpw" + jpw);
+    //     console.log("width", jpw, $('#joystick_container').offset().top + jpw / 2);
+    //     jpw = jpw / 3;
+    //     $('#joystick_container').css({
+    //         'height': jpw + 'px',
+    //         'width': jpw + 'px'
+    //     });
+    //     $('#joystick_container').css('background-color', 'WhiteSmoke');
+    //     if (joystick)
+    //         joystick.destroy();
+    //     joystick = new VirtualJoystick({
+    //         container: document.getElementById('joystick_container'),
+    //         // container: $('#joystick_container'),
+    //         top: $('#joystick_container').offset().top,
+    //         left: $('#joystick_container').offset().left,
+    //         mouseSupport: true,
+    //         stationaryBase: true,
+    //         baseX: $('#joystick_container').offset().left + jpw / 2,
+    //         baseY: $('#joystick_container').offset().top + jpw / 2,
+    //         strokeStyle: 'black',
+    //         limitStickTravel: true,
+    //         stickRadius: jpw
+    //     });
+    // }
+
+    // // onWindowResize();
+    // // -----end copy------
+
+    // $(document).ready(function () {
+    //     console.log("DOCUMENT READY");
+    //     // var jpw = $('#virtualjoystick').width();
+    //     // console.log("width", jpw, $('#joystick_container').offset().top + jpw / 2);
+    //     // console.log("jpw" + jpw);
+    //     // jpw = jpw / 3;
+    //     // $('#joystick_container').css({
+    //     //     'height': jpw + 'px',
+    //     //     'width': jpw + 'px',
+    //     //     // 'background-color': rgb(214, 120, 120),
+    //     // });
+    //     // $('#joystick_container').css('background-color', 'WhiteSmoke');
+    //     // // $('#virtualjoystick').css('background-color', 'cyan'); 
+
+    //     // console.log($('#joystick_container').width());
+    //     // var v = document.getElementById('joystick_container');
+    //     // console.log(v.width);
+    //     createjoystick()
+    // });
+
+    // window.onresize = function () {
+    //     //   if (window.outerWidth() == 980) {alert('');}
+    //     console.log("resizing to " + window.outerWidth)
+    //     // var jpw = $('#virtualjoystick').width();
+    //     // console.log("width", jpw, $('#joystick_container').offset().top + jpw / 2);
+    //     // console.log("jpw" + jpw);
+    //     // jpw = jpw / 3;
+    //     // $('#joystick_container').css({
+    //     //     'height': jpw + 'px',
+    //     //     'width': jpw + 'px',
+    //     //     // 'background-color': rgb(214, 120, 120),
+    //     // });
+    //     // $('#joystick_container').css('background-color', 'WhiteSmoke');
+    //     // // $('#virtualjoystick').css('background-color', 'white'); 
+
+
+    //     createjoystick()
+    // };
+
+
+
+// ?????????????????????????????????????????????????????????/
+
+
+    // // // $(document).ready(function () {
+    // $(function () {
+    //     // Tabs:
+
+    //     $('#controlsCardTab a[href="#actionctrl"]').click(function () {
+    //         // Destroy joystick if it was shown
+    //         // if (joystick)
+    //         // joystick.destroy();
+
+    //         sendModuleCommand("action_module")
+    //         console.log("action tab clicked! sendModuleCommand('action_module')");
+    //     });
+
+    //     $('#controlsCardTab a[href="#virtualjoystick"]').click(function () {
+    //         // sendModuleCommand("??????_module")
+
+
+    //         console.log("virtualjoystick tab clicked!");
+    //         createjoystick()
+
+
+    //         // var jpw = $('#joystick-panel').width();
+    //         // console.log("width", jpw, $('#joystick-container').offset().top + jpw / 2);
+    //         // console.log("container width", $('#joystick-container').width());
+    //         // console.log("panel width", $('#virtualjoystick_tab').width());
+    //         // console.log("container offset", $('#joystick-container').offset().top);
+    //         // console.log("panel offset", $('#virtualjoystick_tab').offset().top);
+    //     });
+
+
+
+    //     // $('#manual_ctrl_Tab a[href="#actionctrl_tab"]').click(function () {
+    //     //     sendModuleCommand("action_module")
+    //     //     console.log("klikna action");
+    //     // });
+    //     $('#manual_ctrl_Tab a[href="#headctrl_tab"]').click(function () {
+    //         sendModuleCommand("head_control_module")
+    //         console.log("klikna head");
+    //     });
+    //     $('#manual_ctrl_Tab a[href="#walkctrl_tab"]').click(function () {
+    //         sendModuleCommand("online_walking_module")
+    //         console.log("klikna walk");
+    //     });
+    //     // Buttons:
+    //     $('#init_btn').click(function () {
+    //         sendOP3Command("ini_pose");
+    //     });
+    //     $('#stand_btn').click(function () {
+    //         sendActionCommand(1)
+    //         console.log('stand_button');
+    //     });
+    //     $('#sit_btn').click(function () {
+    //         sendActionCommand(15)
+    //         console.log('sit_button');
+    //     });
+    //     $('#thankyou_btn').click(function () {
+    //         statusmsg = 'predi';
+    //         console.log('predi ' + statusmsg);
+    //         sendActionCommand(4);
+    //         statusmsg = 'sled';
+    //         console.log("sled " + statusmsg);
+    //         // statusmsg='Action_Finish';
+    //         // while (statusmsg !== 'Action_Finish') {
+    //         //     console.log("VATRE!!!!!    " +statusmsg);
+    //         //     // document.getElementById("msg1").innerHTML = message.status_msg;
+    //         // }
+    //         // alert("mina");
+    //         // sendActionCommand(4);
+    //     });
+    //     $('#oops_btn').click(function () {
+    //         sendActionCommand(27)
+    //     });
+    //     $('#walk_btn').click(function () {
+    //         sendActionCommand(9)
+    //     });
+    //     $('#walk_btn').click(function () {
+    //         sendActionCommand(-1)
+    //     });
+    // });
+
+    
+    </script>
+
+{% endblock page_content %}

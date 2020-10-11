@@ -1,0 +1,277 @@
+{% extends 'topbar.html' %}
+
+{% load static %}
+
+{% block nav_dashboard %}class="nav-item"{% endblock %}
+{% block nav_teleop %}class="nav-item"{% endblock %}
+{% block nav_navigation %}class="nav-item active"{% endblock %}
+{% block nav_smarthome %}class="nav-item"{% endblock %}
+{% block nav_health %}class="nav-item"{% endblock %}
+{% block nav_tasks %}class="nav-item"{% endblock %}
+
+{% block page_content %}
+
+<!-- ################################################## -->
+
+<!-- Begin Page Content -->
+<div id="navigation_page_content">
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-center text-gray-800">NAVIGARION</h1>
+            <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+        </div>
+
+        <div id="status"></div>
+
+        <div class="row">
+
+            <!-- Head camera column -->
+            <div class="col-xl-4 col-lg-5">
+                <!-- <div class="col-xl-3 col-lg-4"> -->
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">HEAD CAMERA</h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-header">Dropdown Header:</div>
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+
+                        <!-- To set the properties of the ros web server video stream:  https://wiki.ros.org/web_video_server -->
+
+                        <!-- For Hitachi robot front camera in servicesim use: -->
+                        <!-- <img class="img-fluid" src="http://{{ fqdn }}:8080/stream?topic=/archie/camera/image_raw" /> -->
+
+                        <!-- For Turtlebot camera use: -->
+                        <!-- <img class="img-fluid center-block"
+                            src="http://{{ fqdn }}:8080/stream?topic=/camera/rgb/image_raw" /> -->
+                        <!-- For OP3 camera resize to:
+                            <img class="img-fluid" src="http://{{ fqdn }}:8080/stream?topic=/archie/camera/image_raw&width=640&height=480" /> -->
+                        <!-- Archie camera topic: -->
+                        <img class="img-fluid" src="http://{{ fqdn }}:8080/stream?topic=/archie/camera/image_raw" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- ##########%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+            <div class="col-xl-4 col-lg-5">
+                <!-- <div class="col-xl-3 col-lg-4"> -->
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">NAVIGATION MAP (click a location to dispatch the
+                            robot to)</h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-header">Dropdown Header:</div>
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body" id="map-panel">
+                        <div id="nav"></div>
+                        <!-- ############################################################################ -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ##########%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+        <div class="row">
+            <div class="col-xl-4 col-lg-5">
+                <!-- <div class="col-xl-3 col-lg-4"> -->
+                <div class="card shadow mb-4">
+                    <!-- Card Header  -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">DISPATCH THE ROBOT TO PREDEFINED POSITION</h6>
+                    </div>
+                    <!-- Card Body -->
+                    <!-- ############################################################################ -->
+                    <div class="card-body" id="waypоint_select">
+                        <!-- <table class="col-xs-12">
+                            <tr>
+                                <td>Battery voltage: <span id="battery_voltage">-</span> V</td>
+                                <td>Laptop battery: <span id="laptop_battery">-</td>
+                            </tr>
+                            <tr>
+                                <td>Wifi strength: <span id="wifi">-</span></td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>Position: (<span id="position_x">0</span>, <span id="position_y">1</span>)</td>
+                                <td>Heading: <span id="heading">11</span>&deg;</td>
+                            </tr>
+                        </table> -->
+                        <p>
+                            <span id="position_x">0</span>, <span id="position_y">1</span>
+                            <span id="heading">11</span>&deg;
+                        </p>
+                        <p>
+                            <select id="waypoints" class="form-control">
+                                <option value="-1" selected="selected">Select waypoint...</option>
+                                {% for point in waypoints %}
+                                <option value="{{ point.id }}">{{ point.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </p>
+                        <p>
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button id="go_button" type="button" class="btn btn-success">Go to selected</button>
+                            <button id="delete_button" type="button" class="btn btn-danger">Delete</button>
+                        </div>&nbsp;&nbsp;&nbsp;
+                        <div class="btn-group" role="group" aria-label="...">
+                            <button id="save_button" type="button" class="btn btn-info">Save position</button>
+                        </div>
+                        </p>
+                    </div>
+                    <!-- ############################################################################ -->
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <!-- ##########%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+        <!-- <div class="col-xl-6 col-lg-7">
+        <div class="card" shadow mb-4>
+            <div class="card-header border-bottom">
+                <ul class="nav nav-tabs card-header-tabs" id="controlsCardTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link  active" id="virtualjoystick-tab" href="#virtualjoystick" data-toggle="tab"
+                            role="tab" aria-controls="virtualjoystick" aria-selected="true">Virtual joystick</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="overview-tab" href="#overview" data-toggle="tab" role="tab"
+                            aria-controls="overview" aria-selected="false">#</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="actionctrl-tab" href="#actionctrl" data-toggle="tab" role="tab"
+                            aria-controls="action" aria-selected="false">Action</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="example-tab" href="#example" data-toggle="tab" role="tab"
+                            aria-controls="example" aria-selected="false">Example</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+            </div> -->
+        <!-- virtual joystick tab content-->
+        <!-- <div class="card-body">
+                <div class="tab-content" id="cardTabContent">
+                    <div class="tab-pane fade  show active" id="virtualjoystick" role="tabpanel"
+                        aria-labelledby="virtualjoystick-tab">
+                        <h5 class="card-title">Virtual joystick</h5>
+                        <div class="text-center">
+                            <div id="joystick_container">
+                            </div>
+                            <span id="result"></span>
+                            <br><br><br>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                        <h2 class="card-title text-primary text-center font-weight-bold">Manual control</h2>
+                        <p class="card-text text-center">Choose a tab...</p>
+                    </div>
+                    <div class="tab-pane fade" id="actionctrl" role="tabpanel" aria-labelledby="actionctrl-tab">
+                        <h5 class="card-title">Action</h5>
+                        <div class="text-center">
+                            <button id="stand_btn" type="button" class="btn btn-outline-primary"
+                                style="font-size:24px">Stand
+                                up </button>
+                            <button id="sit_btn" type="button" class="btn btn-outline-primary"
+                                style="font-size:24px">Sit
+                                down </button>
+                            <br><br>
+                            <button id="thankyou_btn" type="button" class="btn btn-outline-primary"
+                                style="font-size:24px">Thank
+                                you </button>
+                            <button id="oops_btn" type="button" class="btn btn-outline-primary"
+                                style="font-size:24px">Oops... </button>
+                            <button id="walk_btn" type="button" class="btn btn-outline-primary"
+                                style="font-size:24px">Walk
+                                Ready </button>
+                            <button id="stop_btn" type="button" class="btn btn-outline-primary"
+                                style="font-size:24px">Stop
+                            </button>
+                            <br><br><br>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+{% include "page_specific_scripts.html" %}
+<!-- <script src={% static "webrtc/signaling_channel.js" %}></script>
+<script src={% static "webrtc/main.js" %}></script> -->
+<!-- <script src={% static "js/uiapp_virtualjoystick.js" %}></script> -->
+
+<!-- <script src={% static "roslibjs/easeljs.min.js" %}></script>
+<script src={% static "roslibjs/eventemitter2.min.js" %}></script>
+<script src={% static "roslibjs/roslib.min.js" %}></script>
+<script src={% static "roslibjs/ros2d.js" %}></script> -->
+
+<!-- !!! INSTEAD OF  -->
+<!-- <script src={% static "roslibjs/nav2d.js" %}></script> -->
+<!-- !!! IN MELODIC USE THE MODIFIED BY STEFAN nav2djs -> nav2d_modified_for_tf2.js -->
+<!-- <script src={% static "roslibjs/nav2d_modified_for_tf2.js" %}></script> -->
+
+
+<!-- In order to send the context data to the js file,
+    first we declare a variable,which to be loaded before the js file in the page html! -->
+<script>
+    var domain_name = "{{ fqdn }}";
+    var waypoints = new Array();
+    // 
+    {%for point in waypoints %}
+    waypoints[{{ point.id }}] = { 'x' : { { point.x } }, 'y' : { { point.y } }, 'theta' : { { point.theta } } };
+    console.log({{ point.id }} + ' ' + ' x ' + {{ point.x }} + ' y ' + {{ point.y }} + ' theta ' + {{ point.theta }});
+    {% endfor %}
+
+    // console.log('waypoint 0 x=' + waypoints[0].x);
+    
+</script>
+
+<!-- {%for point in waypoints %}
+waypoints[{{ point.id }}] = { 'x' : { { point.x } }, 'y' : { { point.y } }, 'theta' : { { point.theta } } };
+{% endfor %} -->
+
+<!-- <script src={% static "uiapp/js/connect_ros.js" %}></script> -->
+
+<!-- <script src={% static "uiapp/js/nav_map_db.js" %}></script> -->
+
+
+{% endblock page_content %}

@@ -55,16 +55,16 @@
                         <!-- To set the properties of the ros web server video stream:  https://wiki.ros.org/web_video_server -->
 
                         <!-- For Hitachi robot front camera in servicesim use: -->
-                        <!-- <img class="img-fluid" src="http://{{ domainname }}:8080/stream?topic=/archie/camera/image_raw" /> -->
+                        <!-- <img class="img-fluid" src="http://{{ fqdn }}:8080/stream?topic=/archie/camera/image_raw" /> -->
 
                         <!-- For Turtlebot camera use: -->
                         <!-- <img class="img-fluid center-block"
-                            src="http://{{ domainname }}:8080/stream?topic=/camera/rgb/image_raw" /> -->
+                            src="http://{{ fqdn }}:8080/stream?topic=/camera/rgb/image_raw" /> -->
                         <!-- For OP3 camera resize to:
-                            <img class="img-fluid" src="http://{{ domainname }}:8080/stream?topic=/archie/camera/image_raw&width=640&height=480" /> -->
+                            <img class="img-fluid" src="http://{{ fqdn }}:8080/stream?topic=/archie/camera/image_raw&width=640&height=480" /> -->
                         <!-- Archie camera topic: -->
                         <img class="img-fluid"
-                            src="http://{{ domainname }}:8080/stream?topic=/archie/camera/image_raw" />
+                            src="http://{{ fqdn }}:8080/stream?topic=/archie/camera/image_raw" />
                     </div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
                 <div class="card shadow mb-4">
                     <!-- Card Header  -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">DISPATCH THE ROBOT TO PREDEFINED POSITION</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">WAYPOINT SELECT</h6>
                     </div>
                     <!-- Card Body -->
                     <!-- ############################################################################ -->
@@ -250,12 +250,18 @@
 <script>
     var statusmsg = 'empty';
     var ros = new ROSLIB.Ros();
-    ros.connect('ws://{{ domainname }}:9090');
+    ros.connect('ws://{{ fqdn }}:9090');
     // ros.connect('ws://127.0.0.1:9090');
 
     ros.on('connection', function () {
         console.log('Connected to websocket server.');
-        document.getElementById("status").innerHTML = "Connected";
+        // document.getElementById("status").innerHTML = "Connected";
+        $("#ros_connection_status")[0].innerHTML = "<button type='button' class='btn btn-success btn-box'><i class='fas  fa-link fa-2x'></i></button>&nbsp;&nbsp;<h6>Connected</h6>";
+        $("#robot_status")[0].innerHTML = '<i class="fas fa-robot fa-2x" style="color:rgb(123, 230, 123);"></i>';
+            // $("#battery_status")[0].innerHTML = '<i class="fas fa-battery-quarter fa-2x blink_it" style="color:red;"></i>';
+            $("#battery_status")[0].innerHTML = '<i class="fas fa-battery-quarter fa-2x" style="color:orange;"></i>';
+            $("#wifi_status")[0].innerHTML = '<i class="fas fa-wifi fa-2x" style="color:rgb(123, 230, 123);"></i>';
+            $("#smarthome_status")[0].innerHTML = '<i class="fas fa-home fa-2x  " style="color:rgb(123, 230, 123);" ></i>';
     });
 
     ros.on('error', function (error) {
@@ -312,7 +318,7 @@
     });
 
     function init() {
-        //   ros.connect('ws://{{ domainname }}:9090');
+        //   ros.connect('ws://{{ fqdn }}:9090');
         console.log('init....');
         viewer = new ROS2D.Viewer({
             divID: 'nav',

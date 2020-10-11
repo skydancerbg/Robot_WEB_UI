@@ -22,4 +22,10 @@ gnome-terminal \
     echo Starting to relay topic /servicebot/camera_front/image_raw to /archie/camera/image_raw;\
     source ~/catkin_ws/devel/setup.bash
     rosrun topic_tools relay /servicebot/camera_front/image_raw /archie/camera/image_raw;\
+  " '\
+  --tab-with-profile=halt -e '/bin/bash -c "\
+    sleep 15;\
+    echo Starting to relay topic /archie/cmd_vel to /servicebot/cmd_vel;\
+    source ~/catkin_ws/devel/setup.bash    
+    rosrun topic_tools relay /archie/cmd_vel /servicebot/cmd_vel;\
   " ' 

@@ -31,7 +31,7 @@ SECRET_KEY = '#r@f_n-0vf5i&ni5skq5$n)26%7)c@j27g-9$qb9@b@@(_9wnh'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.0.100', '192.168.134.128', '127.0.0.1','localhost','192.168.1.177', '0.0.0.0']
 
 
 # Application definition
@@ -63,6 +63,7 @@ THIRD_PARTY_APPS =[
 LOCAL_APPS =[
      # add local apps which you create using startapp
      'uiapp',
+     
 ]
 
  # Application definition
@@ -180,14 +181,22 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+
+]
 
 STATIC_URL = '/static/'
 
 # STATICFILES_DIRS = (     
 # os.path.join(PROJECT_PATH, 'static'), 
 # ) 
+APP_DIR = os.path.join(BASE_DIR, '/uiapp/')
 STATICFILES_DIRS = (     
-os.path.join(BASE_DIR, 'static'), 
+os.path.join(BASE_DIR, 'static'),
+# os.path.join(APP_DIR, 'static'), 
+'~/home/robco/Robot_WEB_UI/webui/uiapp/static',
 ) 
 
 # STATIC_ROOT = os.path.join(PROJECT_PATH, 'staticfiles/')

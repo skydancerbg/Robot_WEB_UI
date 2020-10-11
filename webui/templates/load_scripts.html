@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+{% block scripts %}
+
+
+<!-- Begin Page Content -->
+<!-- ############################ -->
+
+
+
+
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- ############################ -->
+    <!-- ######### JQUERY MUST BE LOADED HERE BEFORE IT IS USED IN THE OTHER SUB TEMPLATE PAGES, OTHERWHISE
+        FUNCTIONS WILL NOT WORK ON THE INNER PAGES!!!!!!!!!!!!
+        CAN NOT BE LOADED AT THE END OF THIS PAGE...################### -->
+
+    <!-- Bootstrap core JavaScript-->
+    <script src={% static "vendor/jquery/jquery.min.js" %}></script>
+    <script src={% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src={% static "vendor/jquery-easing/jquery.easing.min.js" %}></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src={% static "js/sb-admin-2.min.js" %}></script>
+
+
+    <!-- <script src={% static "webrtc/signaling_channel.js" %}></script>
+        <script src={% static "webrtc/main.js" %}></script> -->
+    <script src={% static "virtualjoystick/virtualjoystick.js" %}></script>
+    <script src={% static "roslibjs/easeljs.min.js" %}></script>
+    <script src={% static "roslibjs/eventemitter2.min.js" %}></script>
+    <script src={% static "roslibjs/roslib.min.js" %}></script>
+    <script src={% static "roslibjs/ros2d.js" %}></script>
+
+    <!-- !!! INSTEAD OF  -->
+    <!-- <script src={% static "roslibjs/nav2d.js" %}></script> -->
+    <!-- !!! IN ROS MELODIC USE THE MODIFIED BY STEFAN nav2djs -> nav2d_modified_for_tf2.js -->
+    <script src={% static "roslibjs/nav2d_modified_for_tf2.js" %}></script>
+
+    <!-- uiapp scripts for all pages-->
+
+    <!-- <script src={% static "uiapp/js/load_virtualjoystick.js" %}></script> -->
+    <script src={% static "uiapp/js/nav_map.js" %}></script>
+
+    <!-- IMPORTANT! connect_ros.js is getting loaded with the particular web page content,
+    in order to pass the domainname django context wariable from that page to the js file -->
+    <!-- look for <script src={% static "uiapp/js/connect_ros.js" %}></script> at the web page content-->
+
+
+
+    <!-- ############################ -->
+    {% block topbar %} {% endblock topbar %}
+
+</div>
+<!-- End of Content Wrapper -->
+
+{% endblock scripts %}

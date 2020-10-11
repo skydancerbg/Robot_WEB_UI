@@ -5,3 +5,36 @@ source ~/Robot_WEB_UI/env/bin/activate
 cd ~/Robot_WEB_UI/webui
 
 python3 manage.py runserver
+
+python3 manage.py runserver 0.0.0.0:8000
+
+-----------------------
+sudo ufw allow 80 - port 80 Apache
+
+sudo ufw allow 8000 - Django development server
+
+sudo ufw allow 8080 - Web Video Server
+
+sudo ufw allow 9090 - ros bridge
+------------------------
+
+roslaunch turtlebot_teleop keyboard_teleop.launch
+
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+Run.
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py
+With custom values.
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py _speed:=0.9 _turn:=0.8
+Publishing to a different topic (in this case my_cmd_vel).
+rosrun teleop_twist_keyboard teleop_twist_keyboard.py cmd_vel:=my_cmd_vel
+
+~/Robot_WEB_UI/webui/./start_tb2_amcl_in_kitchen_dining_world.launch.sh
+
+~/Robot_WEB_UI/webui/./start_tb2_amcl_in_kitchen_dining_world.launch.sh
+
+rosrun archie_fake_ifo_pub battery_level_fake_pub_node
+
+rosrun archie_fake_ifo_pub battery_level_fake_pub_node
+
+https://answers.ros.org/question/233353/set-delay-between-starting-nodes-within-launch-file/  
+https://mdbootstrap.com/docs/jquery/css/colors/ bootstrap color codes

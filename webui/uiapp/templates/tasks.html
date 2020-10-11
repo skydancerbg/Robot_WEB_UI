@@ -1,0 +1,29 @@
+{% extends 'topbar.html' %}
+
+{% load static %}
+{% block nav_dashboard %}class="nav-item"{% endblock %}
+{% block nav_teleop %}class="nav-item"{% endblock %}
+{% block nav_navigation %}class="nav-item"{% endblock %}
+{% block nav_smarthome %}class="nav-item"{% endblock %}
+{% block nav_health %}class="nav-item"{% endblock %}
+{% block nav_tasks %}class="nav-item active"{% endblock %}
+
+{% block page_content %}
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-center text-gray-800">PREDEFINED ROBOT TASKS</h1>
+        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+    </div>
+    <div>
+        <p>
+        <h2>Here will be the list of high level predefined tasks the user can choose from.</h2>
+        <br>
+        <h3>(Tasks like: Bring me some water!)</h3>
+        
+        <br><br>
+        <h4>The ability of Archie robot to perform such tasks yet to be developed...</h4>
+        </p>
+    </div>
+</div>
+{% endblock page_content %}

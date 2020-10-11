@@ -55,16 +55,16 @@
                         <!-- To set the properties of the ros web server video stream:  https://wiki.ros.org/web_video_server -->
 
                         <!-- For Hitachi robot front camera in servicesim use: -->
-                        <!-- <img class="img-fluid" src="http://{{ domainname }}:8080/stream?topic=/archie/camera/image_raw" /> -->
+                        <!-- <img class="img-fluid" src="http://{{ fqdn }}:8080/stream?topic=/archie/camera/image_raw" /> -->
 
                         <!-- For Turtlebot camera use: -->
                         <!-- <img class="img-fluid center-block"
-                            src="http://{{ domainname }}:8080/stream?topic=/camera/rgb/image_raw" /> -->
+                            src="http://{{ fqdn }}:8080/stream?topic=/camera/rgb/image_raw" /> -->
                         <!-- For OP3 camera resize to:
-                            <img class="img-fluid" src="http://{{ domainname }}:8080/stream?topic=/archie/camera/image_raw&width=640&height=480" /> -->
+                            <img class="img-fluid" src="http://{{ fqdn }}:8080/stream?topic=/archie/camera/image_raw&width=640&height=480" /> -->
                         <!-- Archie camera topic: -->
                         <img class="img-fluid"
-                            src="http://{{ domainname }}:8080/stream?topic=/archie/camera/image_raw" />
+                            src="http://{{ fqdn }}:8080/stream?topic=/archie/camera/image_raw" />
                     </div>
                 </div>
             </div>
@@ -250,7 +250,7 @@
 <script>
     var statusmsg = 'empty';
     var ros = new ROSLIB.Ros();
-    ros.connect('ws://{{ domainname }}:9090');
+    ros.connect('ws://{{ fqdn }}:9090');
     // ros.connect('ws://127.0.0.1:9090');
 
     ros.on('connection', function () {
@@ -312,7 +312,7 @@
     });
 
     function init() {
-        //   ros.connect('ws://{{ domainname }}:9090');
+        //   ros.connect('ws://{{ fqdn }}:9090');
         console.log('init....');
         viewer = new ROS2D.Viewer({
             divID: 'nav',

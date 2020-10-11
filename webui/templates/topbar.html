@@ -7,11 +7,23 @@
     <!-- Topbar -->
     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
+        <!-- <button type="button" class="btn btn-default btn-circle"><i class="fa fa-unlink"></i> -->
+        <div class="row" id="ros_connection_status">
+            <button type="button" class="btn btn-outline-secondary btn-box"><i class="fas fa-unlink fa-2x"></i>
+            </button>
+            <!-- <button type="button" class="btn btn-success btn-circle">
+            <i class="fas  fa-link fa-2x"></i>
+        </button> -->
+            &nbsp;&nbsp;<h6>Disconnected</h6>
+        </div>
         <!-- Sidebar Toggle (Topbar) -->
-        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <!-- <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
         </button>
-
+        <button type="button" class="btn btn-success btn-circle">
+            <i class="fa fa-link"></i>
+        </button>
+        <i class="fas fa-unlink fa-2x" style="color:grey;"></i> -->
         <!-- Topbar Search -->
         <!-- <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
@@ -34,8 +46,8 @@
                     aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-search fa-fw"></i>
                 </a> -->
-                <!-- Dropdown - Messages -->
-                <!-- <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+            <!-- Dropdown - Messages -->
+            <!-- <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
                     aria-labelledby="searchDropdown">
                     <form class="form-inline mr-auto w-100 navbar-search">
                         <div class="input-group">
@@ -51,69 +63,59 @@
                 </div>
             </li> -->
             <!-- ############################ -->
-            <!-- Nav Item - Alerts -->
+            <!-- Nav Item - robot_status -->
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <!-- <i class="fas fa-bell fa-fw"></i> -->
-                    <i class="fas fa-robot fa-2x" style="color:rgb(123, 230, 123);"></i>
-                    <!-- Counter - Alerts -->
-                    <!-- <span class="badge badge-danger badge-counter">3+</span> -->
+                    <!-- <i class="fas fa-robot fa-2x" style="color:rgb(123, 230, 123);"></i> -->
+                    <div id="robot_status">
+                        <i class="fas fa-robot fa-2x" style="color:grey;"></i>
+                    </div>
                 </a>
-
             </li>
-            <!-- Nav Item - Alerts -->
+            <!-- Nav Item - battery_status -->
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <!-- <i class="fas fa-bell fa-fw"></i> -->
-                    <i class="fas fa-battery-quarter fa-2x" style="color:red;"></i>
-                    <!-- Counter - Alerts -->
-                    <!-- <span class="badge badge-danger badge-counter">3+</span> -->
+                    <!-- <i class="fas fa-battery-quarter fa-2x" style="color:red;"></i> -->
+                    <div id="battery_status">
+                        <i class="fas fa-battery-empty fa-2x" style="color:grey;"></i>
+                    </div>
                 </a>
-
             </li>
-            <!-- Nav Item - Alerts -->
+            <!-- Nav Item - wifi_status -->
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <!-- <i class="fas fa-bell fa-fw"></i> -->
-                    <i class="fas fa-wifi fa-2x" style="color:rgb(123, 230, 123);"></i>
-                    <!-- Counter - Alerts -->
-                    <!-- <span class="badge badge-danger badge-counter">3+</span> -->
+                    <!-- <i class="fas fa-wifi fa-2x" style="color:rgb(123, 230, 123);"></i> -->
+                    <div id="wifi_status">
+                        <i class="fas fa-wifi fa-2x" style="color:grey;"></i>
+                    </div>
                 </a>
-
             </li>
-            <!-- Nav Item - Alerts -->
+            <!-- Nav Item - smarthome_status -->
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <!-- <i class="fas fa-bell fa-fw"></i> -->
-                    <i class="fas fa-home fa-2x  " style="color:rgb(123, 230, 123);" ></i>
-                    <!-- Counter - Alerts -->
-                    <!-- <span class="badge badge-danger badge-counter">3+</span> -->
+                    <!-- <i class="fas fa-home fa-2x  " style="color:rgb(123, 230, 123);" ></i> -->
+                    <div id="smarthome_status">
+                        <i class="fas fa-home fa-2x  " style="color:grey;"></i>
+                    </div>
                 </a>
-
             </li>
-            <!-- Nav Item - Alerts -->
+            <!-- Nav Item - EMPTY SPOT -->
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <!-- <i class="fas fa-bell fa-fw"></i> -->
-                    <!-- Counter - Alerts -->
-                    <!-- <span class="badge badge-danger badge-counter">3+</span> -->
+                   <!-- EMPTY SPOT ON THE TOP BAR -->
                 </a>
-
             </li>
-            <!-- Nav Item - Alerts -->
+            <!-- Nav Item - EMPTY SPOT -->
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <!-- <i class="fas fa-bell fa-fw"></i> -->
-                    <!-- Counter - Alerts -->
-                    <!-- <span class="badge badge-danger badge-counter">3+</span> -->
+                   <!-- EMPTY SPOT ON THE TOP BAR -->
                 </a>
-
             </li>
             <!-- ############################ -->
 
@@ -280,16 +282,16 @@
 <!-- END Page Content -->
 
 
-    <!-- Footer -->
-    <div id="footer"></div>
-    <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-                <span>Copyright &copy; ARCHIE WEB UI 2020</span>
-            </div>
+<!-- Footer -->
+<div id="footer"></div>
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; ARCHIE WEB UI 2020</span>
         </div>
-    </footer>
     </div>
-    <!-- End of Footer -->
-    
+</footer>
+</div>
+<!-- End of Footer -->
+
 {% endblock topbar %}

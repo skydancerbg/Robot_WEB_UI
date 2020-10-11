@@ -7,10 +7,11 @@ urlpatterns = [
     path('', views.dashboard, name='dashboard'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('teleop/', views.teleop, name='teleop'),
+    path('teleopv1/', views.teleopv1, name='teleopv1'),
     re_path(r'^navigation/(?P<action>\S+)/', views.navigation, name='navigation'),
     path('navigation/', views.navigation, name='navigation'),
     path('smarthome/', views.smarthomeui, name='smarthomeui'),
-    path('healthdata/', views.healthdata, name='healthdata'),
+    path('tasks/', views.tasks, name='tasks'),
 
     # path('', TemplateView.as_view(template_name='dashboard.html')),
     # path('dashboard/', TemplateView.as_view(template_name='dashboard.html')),

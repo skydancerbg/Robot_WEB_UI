@@ -1,0 +1,41 @@
+{% load static %}
+
+<!-- NB: This file is included in base.html template in order to 
+    load the common libraries before the page specific ones! -->
+
+<!-- ############################ -->
+<!-- ######### JQUERY MUST BE LOADED HERE BEFORE IT IS USED IN THE OTHER SUB TEMPLATE PAGES, OTHERWHISE
+        FUNCTIONS WILL NOT WORK ON THE INNER PAGES!!!!!!!!!!!!
+        CAN NOT BE LOADED AT THE END OF THE CHILD PAGE...################### -->
+
+<!-- Bootstrap core JavaScript-->
+<script src={% static "vendor/jquery/jquery.min.js" %}></script>
+<script src={% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}></script>
+
+<!-- Core plugin JavaScript-->
+<script src={% static "vendor/jquery-easing/jquery.easing.min.js" %}></script>
+
+<!-- Custom scripts for all pages-->
+<script src={% static "js/sb-admin-2.min.js" %}></script>
+
+<!-- webrtc related scripts for all pages-->
+<!-- <script src={% static "webrtc/signaling_channel.js" %}></script>
+    <script src={% static "webrtc/main.js" %}></script> -->
+
+<!-- roslibjs related scripts for all pages-->
+<script src={% static "roslibjs/easeljs.min.js" %}></script>
+<script src={% static "roslibjs/eventemitter2.min.js" %}></script>
+<script src={% static "roslibjs/roslib.min.js" %}></script>
+<script src={% static "roslibjs/ros2d.js" %}></script>
+
+<!-- uiapp scripts for all pages-->
+
+<!-- <script src={% static "virtualjoystick/virtualjoystick.js" %}></script> -->
+<!-- this uiapp scripts are loaded at the pages they are used at-->
+<!-- <script src={% static "uiapp/js/load_virtualjoystick.js" %}></script> -->
+<!-- <script src={% static "uiapp/js/nav_map.js" %}></script> -->
+<!-- <script src={% static "uiapp/js/nav_map_and_go_menu.js" %}></script> -->
+
+<!-- IMPORTANT! connect_ros.js is getting loaded with the particular web page content,
+    in order to pass the domainname django context wariable from that page to the js file -->
+<!-- look for <script src={% static "uiapp/js/connect_ros.js" %}></script> at the web page content-->
