@@ -7,10 +7,7 @@
 {% block nav_navigation %}class="nav-item"{% endblock %}
 {% block nav_smarthome %}class="nav-item"{% endblock %}
 {% block nav_health %}class="nav-item"{% endblock %}
-{% block nav_actionsandtasks %}class="nav-item"{% endblock %}
-{% block nav_about %}class="nav-item"{% endblock %}
-
-
+{% block nav_tasks %}class="nav-item"{% endblock %}
 {% block page_content %}
 
 <!-- ################################################## -->
@@ -82,24 +79,22 @@
                                     aria-selected="true">Virtual joystick</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" id="overview-tab" href="#overview" data-toggle="tab" role="tab"
+                                    aria-controls="overview" aria-selected="false">#</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" id="actionctrl-tab" href="#actionctrl" data-toggle="tab" role="tab"
                                     aria-controls="action" aria-selected="false">Action</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="btnjoyctrl-tab" href="#btnjoyctrl" data-toggle="tab" role="tab"
-                                    aria-controls="btnjoyctrl" aria-selected="false">
+                                <a class="nav-link" id="btns-and-voice-tab" href="#cameramousectrl" data-toggle="tab"
+                                    role="tab" aria-controls="btnsandvoicectrl" aria-selected="false">
                                     Button joystick
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="advbtnjoyctrl-tab" href="#advbtnjoyctrl" data-toggle="tab"
-                                    role="tab" aria-controls="advbtnjoyctrl" aria-selected="false">
-                                    Advanced Button joystick
-                                </a>
-                            </li>
-                            <!-- <li class="nav-item">
                                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                            </li> -->
+                            </li>
                         </ul>
                     </div>
 
@@ -151,84 +146,31 @@
                                 </div>
                             </div>
 
-                            <!-- ##########%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+                            <!-- voice and buttoncontrols tab content-->
+                            <div class="tab-pane fade" id="cameramousectrl" role="tabpanel"
+                                aria-labelledby="camera-mouse-ctrl-tab">
+                                <h6 class="card-title">Just hoover over a button with your mouse pointer. If you use <strong>Camera mouse</strong>, set it to "no click".
+                                    !</h6>
+                                <!-- <p>jhkjh<i class="fas fa-arrow fa-rotate-90"></i></p>
+                                    <p>jhkjh<i class="fas fa-arrow fa-rotate-180"></i></p>
+                                    <p>jhkjh<i class="fas fa-arrow fa-rotate-270"></i></p>
+                                    <p>jhkjh<i class="fas fa-arrow fa-flip-horizontal"></i></p>
+                                    <p>jhkjh<i class="fas fa-arrow fa-flip-vertical"></i></p>
+                                    <p>jhkjh<i class="fas fa-arrow fa-flip-both"></i></p> -->
 
-                            <!-- Simple Button Joystic Control tab content-->
-                            <div class="tab-pane fade" id="btnjoyctrl" role="tabpanel" aria-labelledby="btnjoyctrl-tab">
-                                <h6 class="card-title">Just hoover over a button with your mouse pointer. You can use
-                                    <strong>Camera mouse</strong>if necessary (click is not required).
-                                </h6>
                                 <!-- <p class="card-text">...</p> -->
                                 <div class="text-center">
                                     <div id="cameraMouseControls">
                                         <table width="100%">
                                             <tr>
-                                                <td colspan="3" align="center">
-                                                    <button id="forward_btn" type="button"
-                                                        class="btn btn-outline-primary hover_btn" data-dx="0.4"
-                                                        data-dz="0.0" style="width: 170px; font-size: 26px;">
-                                                        <strong>GO FORWARD</strong>
-                                                        <i class="fas fa-arrow-circle-up"></i>
+                                                <!-- <td colspan="3" align="center">
+                                                    <button id="thankyou_btn" type="button"
+                                                        class="btn btn-outline-primary"
+                                                        style="width: 170px; font-size: 26px;">
+                                                        GO FORWARD
+                                                        <i class="fas fa-arrow-circle-up fa-flip-vertical" ></i>
                                                     </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td align="center">
-                                                    <button id="left_btn" type="button"
-                                                        class="btn btn-outline-primary hover_btn" data-dx="0.0"
-                                                        data-dz="0.6" style="width: 170px; font-size: 28px;">
-                                                        <strong>TURN LEFT</strong>
-                                                        <i class="fas fa-arrow-circle-left "></i>
-                                                    </button>
-                                                </td>
-                                                <!-- Empty table cell -->
-                                                <td align="center"></td>
-                                                <!-- Turn right button -->
-                                                <td align="center">
-                                                    <button id="right_btn" type="button"
-                                                        class="btn btn-outline-primary hover_btn" data-dx="0.0"
-                                                        data-dz="-0.6" style="width: 170px; font-size: 28px;">
-                                                        <strong>TURN RIGHT</strong>
-                                                        <i class="fas fa-arrow-circle-right"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <!-- <td colspan="3" align="center"><button class="camera-mouse"
-                                                        data-dx="-0.4" data-dz="0.0" type="button"
-                                                        class="btn btn-default"
-                                                        style="width: 140px; font-size: 26px;">Move backward <i
-                                                            class="fa fa-arrow-down"></i></button></td> -->
-                                                <td align="center"></td>
-
-                                                <td align="center">
-                                                    <button id="backwards_btn" type="button"
-                                                        class="btn btn-outline-primary hover_btn" data-dx="-0.4"
-                                                        data-dz="0.0" style="width: 200px; font-size: 26px;">
-                                                        <strong>GO BACKWARDS</strong>
-                                                        <i class="fas fa-arrow-circle-down"></i>
-                                                    </button>
-                                                </td>
-                                                <td align="center"></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                    <br><br><br>
-                                </div>
-                            </div>
-
-                            <!-- ##########%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
-
-                            <!-- Advanced Button Joystic Control tab content-->
-                            <div class="tab-pane fade" id="advbtnjoyctrl" role="tabpanel"
-                                aria-labelledby="advbtnjoyctrl-tab">
-                                <h6 class="card-title">Just hoover over a button with your mouse pointer. You can use
-                                    <strong>Camera mouse</strong>if necessary (click is not required).
-                                </h6>
-                                <div class="text-center">
-                                    <div id="cameraMouseControls">
-                                        <table width="100%">
-                                            <tr>
+                                                </td> -->
                                                 <td align="center"></td>
 
                                                 <td align="center">
@@ -240,16 +182,16 @@
                                                     </button>
                                                 </td>
                                                 <td align="center">
-                                                    <button id="adv_rorward_btn" type="button"
-                                                        class="btn btn-outline-primary hover_btn" data-dx="0.4"
-                                                        data-dz="0.0" style="width: 170px; font-size: 26px;">
+                                                    <button id="thankyou_btn" type="button"
+                                                        class="btn btn-outline-primary"
+                                                        style="width: 170px; font-size: 26px;">
                                                         <strong>GO FORWARD</strong>
                                                         <i class="fas fa-arrow-circle-up"></i>
                                                     </button>
                                                 </td>
                                                 <td align="center">
                                                     <button id="thankyou_btn" type="button"
-                                                        class="btn btn-outline-primary"
+                                                        class="btn btn-outline-primary "
                                                         style="width: 170px; font-size: 26px;" disabled>
                                                         STRAFING
                                                         <i class="fas fas fa-external-link-alt"></i>
@@ -257,28 +199,52 @@
                                                 </td>
                                             </tr>
                                             <td align="center"></td>
+
+                                            <!-- <tr>
+                                                <td colspan="3" align="center">
+                                                    <button class="camera-mouse" data-dx="0.4" data-dz="0.0"
+                                                        type="button" class="btn btn-outline-primary"
+                                                        style="width: 140px; font-size: 26px;">
+                                                        <span class="glyphicon glyphicon-search"
+                                                            aria-hidden="true"></span>
+                                                        GO FROWARD
+                                                        <i class="fas fa-arrow-up"></i>
+                                                    </button>
+                                                </td>
+                                            </tr> -->
                                             <tr>
+                                                <!-- <td align="center"><button class="camera-mouse" data-dx="0.0"
+                                                        data-dz="0.6" type="button" class="btn btn-default"
+                                                        style="width: 140px; font-size: 26px;"><i
+                                                            class="fas fa-arrow-left"></i>TURN LEFT</button></td> -->
                                                 <td align="center">
                                                     <button id="thankyou_btn" type="button"
                                                         class="btn btn-outline-primary"
                                                         style="width: 100px; font-size: 26px;" disabled>
                                                         STRAFING
-                                                        <i class="fas fa-angle-double-left"></i>
+                                                        <i
+                                                            class="fas fa-angle-double-left"></i>
                                                     </button>
                                                 </td>
                                                 <td align="center">
-                                                    <button id="adv_left_btn" type="button"
-                                                        class="btn btn-outline-primary hover_btn" data-dx="0.0"
-                                                        data-dz="0.6" style="width: 170px; font-size: 28px;">
+                                                    <button id="thankyou_btn" type="button"
+                                                        class="btn btn-outline-primary"
+                                                        style="width: 170px; font-size: 28px;">
                                                         <strong>TURN LEFT</strong>
                                                         <i class="fas fa-arrow-circle-left "></i>
                                                     </button>
                                                 </td>
+                                                <!-- Empty table cell -->
+                                                <!-- <td align="center" style="width: 20px; font-size: 24px;"></td> -->
                                                 <td align="center"></td>
+                                                <!-- <td align="center"><button class="camera-mouse" data-dx="0.0"
+                                                        data-dz="-0.6" type="button" class="btn btn-default"
+                                                        style="width: 140px; font-size: 26px;">Turn Right <i
+                                                            class="fa fa-arrow-right"></i></button></td> -->
                                                 <td align="center">
-                                                    <button id="adv_right_btn" type="button"
-                                                        class="btn btn-outline-primary hover_btn" data-dx="0.0"
-                                                        data-dz="-0.6" style="width: 170px; font-size: 28px;">
+                                                    <button id="thankyou_btn" type="button"
+                                                        class="btn btn-outline-primary"
+                                                        style="width: 170px; font-size: 28px;">
                                                         <strong>TURN RIGHT</strong>
                                                         <i class="fas fa-arrow-circle-right"></i>
                                                     </button>
@@ -288,12 +254,18 @@
                                                         class="btn btn-outline-primary"
                                                         style="width: 100px; font-size: 26px;" disabled>
                                                         STRAFING
-                                                        <i class="fas fa-angle-double-right"></i>
+                                                        <i
+                                                            class="fas fa-angle-double-right"></i>
                                                     </button>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td align="center"></td>
+                                                <!-- <td colspan="3" align="center"><button class="camera-mouse"
+                                                        data-dx="-0.4" data-dz="0.0" type="button"
+                                                        class="btn btn-default"
+                                                        style="width: 140px; font-size: 26px;">Move backward <i
+                                                            class="fa fa-arrow-down"></i></button></td> -->
+                                                            <td align="center"></td>
 
                                                 <td align="center">
                                                     <button id="thankyou_btn" type="button"
@@ -305,9 +277,9 @@
                                                     </button>
                                                 </td>
                                                 <td align="center">
-                                                    <button id="adv_backwards_btn" type="button"
-                                                        class="btn btn-outline-primary hover_btn" data-dx="-0.4"
-                                                        data-dz="0.0" style="width: 200px; font-size: 26px;">
+                                                    <button id="thankyou_btn" type="button"
+                                                        class="btn btn-outline-primary"
+                                                        style="width: 200px; font-size: 26px;">
                                                         <strong>GO BACKWARDS</strong>
                                                         <i class="fas fa-arrow-circle-down"></i>
                                                     </button>

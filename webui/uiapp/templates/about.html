@@ -1,0 +1,62 @@
+{% extends 'topbar.html' %}
+
+{% load static %}
+{% block nav_dashboard %}class="nav-item"{% endblock %}
+{% block nav_teleop %}class="nav-item"{% endblock %}
+{% block nav_navigation %}class="nav-item"{% endblock %}
+{% block nav_actionsandtasks %}class="nav-item"{% endblock %}
+{% block nav_smarthome %}class="nav-item"{% endblock %}
+{% block nav_health %}class="nav-item"{% endblock %}
+{% block nav_about %}class="nav-item active"{% endblock %}
+
+{% block page_content %}
+<div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <!-- <h1 class="h3 mb-0 text-center text-gray-800">ABOUT THIS WEB APPLICATION</h1> -->
+        <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+            class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+    </div>
+    <div class="text-center">
+        <p>
+        <h2>ArchieUI - WEB enabled robot and Smart home control</h2>
+        </p>
+        <p>The development of this WEB application is carried out as part of the effort for obtaining the degree of
+            Doctor
+            technicae (Dr. techn.),</p>
+        <strong>
+            <P> submitted at TU Wien, Faculty of Mechanical and Industrial Engineering, by</P>
+        </strong>
+        <P> Stefan Chivarov </P>
+        <strong>
+            <P>under the supervision of</P>
+            <p> Em.O.Univ.Prof. Dipl.-Ing. Dr.techn. Dr.h.c.mult. Peter Kopacek</p>
+            <p>Institute of Intelligent Handling Devices and Robotics</p>
+
+            <br><br>
+            <p>The main goal of this application is to provide a simple to use, user friendly interface for the service
+                robot Archie, opposed to the scientific research focused (technical) interfaces usually being developed.
+            </p>
+
+            <p>ArchieUI is an open source WEB application, used to control the cost-oriented humanoid robot Archie,
+                being developed at the Technische Universität Wien (TU Wien).</p>
+
+            <p>In addition to the robot control, ArchieUI provides access to a Smart home server and other IoT sensors
+                and actuators in the
+                users home environment.
+            </p>
+            <p>ArchieUI application has built in voice control and ease of access features, thus it can be used
+                for carring out usability research (in real or simulated environment) with elderly and disabled persons,
+                also providing remote access and control to their relatives over the Internet.</p>
+            <br>
+            <p> ArchieUI was developed to control the Archie robot, but it can be used with any other ROS (Robot
+                Operating System) enabled robot (or simulated ROS robot)</p>
+
+            <p> by changing the ROS topics it uses, or just relaying the topics of the other robot to Archie topics,
+                using topic_tools package. </p>
+            <br>
+            <p>The ArchieUI application is available at githib for the roboticists socsiety,</p>
+            <p>to use and modify in the way they need it for their research! </p>
+        </strong>
+    </div>
+</div>
+{% endblock page_content %}

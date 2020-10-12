@@ -1,0 +1,131 @@
+{% extends 'topbar.html' %}
+
+{% load static %}
+{% block nav_dashboard %}class="nav-item"{% endblock %}
+{% block nav_teleop %}class="nav-item"{% endblock %}
+{% block nav_navigation %}class="nav-item"{% endblock %}
+{% block nav_smarthome %}class="nav-item"{% endblock %}
+{% block nav_health %}class="nav-item"{% endblock %}
+{% block nav_actionsandtasks %}class="nav-item active"{% endblock %}
+
+{% block page_content %}
+
+<!-- ################################################## -->
+
+<!-- Begin Page Content -->
+<div id="teleop_page_content">
+    <div class="container-fluid">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-center text-gray-800">ACTIONS AND TASKS</h1>
+            <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
+        </div>
+
+        <!-- <div id="status"></div> -->
+
+        <div class="row">
+
+            <!-- Head camera column -->
+            <div class="col-xl-4 col-lg-5">
+                <!-- <div class="col-xl-3 col-lg-4"> -->
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">HEAD CAMERA</h6>
+                        <div class="dropdown no-arrow">
+                            <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                aria-labelledby="dropdownMenuLink">
+                                <div class="dropdown-header">Dropdown Header:</div>
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card Body -->
+                    <div class="card-body">
+                        <!-- Archie camera topic: -->
+                        <img class="img-fluid" src="http://{{ fqdn }}:8080/stream?topic=/archie/camera/image_raw" />
+                    </div>
+                </div>
+            </div>
+            <!-- ##########%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+            <!-- <div class="card" shadow mb-4> -->
+            <!-- <div class="col-sm-6"> -->
+            <div class="col-xl-6 col-lg-7">
+                <div class="card" shadow mb-4>
+                    <div class="card-header border-bottom">
+                        <ul class="nav nav-tabs card-header-tabs" id="controlsCardTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link" id="overview-tab" href="#overview" data-toggle="tab" role="tab"
+                                    aria-controls="overview" aria-selected="false">#</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="actionctrl-tab" href="#actionctrl" data-toggle="tab" role="tab"
+                                    aria-controls="action" aria-selected="true">Action</a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                            </li> -->
+                        </ul>
+                    </div>
+
+                    
+                            <div class="tab-pane fade" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+                                <h2 class="card-title text-primary text-center font-weight-bold">Manual control</h2>
+                                <p class="card-text text-center">Choose a tab...</p>
+                            </div>
+                            <!-- action tab content-->
+                            <div class="tab-pane fade" id="actionctrl" role="tabpanel" aria-labelledby="actionctrl-tab">
+                                <h5 class="card-title">Action</h5>
+                                <!-- <p class="card-text">...</p> -->
+                                <div class="text-center">
+                                    <button id="stand_btn" type="button" class="btn btn-outline-primary"
+                                        style="font-size:24px">Stand
+                                        up </button>
+                                    <button id="sit_btn" type="button" class="btn btn-outline-primary"
+                                        style="font-size:24px">Sit
+                                        down </button>
+                                    <br><br>
+                                    <button id="thankyou_btn" type="button" class="btn btn-outline-primary"
+                                        style="font-size:24px">Thank
+                                        you </button>
+                                    <button id="oops_btn" type="button" class="btn btn-outline-primary"
+                                        style="font-size:24px">Oops... </button>
+                                    <button id="walk_btn" type="button" class="btn btn-outline-primary"
+                                        style="font-size:24px">Walk
+                                        Ready </button>
+                                    <button id="stop_btn" type="button" class="btn btn-outline-primary"
+                                        style="font-size:24px">Stop
+                                    </button>
+                                    <br><br><br>
+                                </div>
+                            </div>
+
+                            <!-- ##########%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% include "page_specific_scripts.html" %}
+
+
+
+<script>
+
+</script>
+
+{% endblock page_content %}

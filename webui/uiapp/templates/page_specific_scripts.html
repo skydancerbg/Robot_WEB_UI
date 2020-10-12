@@ -22,11 +22,30 @@
 <script defer src={% static "roslibjs/nav2d_modified_for_tf2.js" %}></script>
 <script defer src={% static "uiapp/js/connect_ros.js" %}></script>
 <script defer src={% static "uiapp/js/nav_map.js" %}></script>
+<script>
+
+</script>
+<script defer src={% static "uiapp/js/speech_recognition.js" %}></script>
+
 {% elif page == 'teleop' %}
 <script src={% static "virtualjoystick/virtualjoystick.js" %}></script>
 <script src={% static "uiapp/js/connect_ros.js" %}></script>
 <script src={% static "uiapp/js/load_virtualjoystick.js" %}></script>
 <script src={% static "uiapp/js/top_bar_statuses_update.js" %}></script>
+<script src={% static "uiapp/js/speech_recognition.js" %}></script>
+<script src={% static "uiapp/js/mouse_hover_btn_joystick.js" %}></script>
+
+{% elif page == 'actionsandtasks' %}
+<!-- <script src={% static "virtualjoystick/virtualjoystick.js" %}></script> -->
+<script src={% static "uiapp/js/connect_ros.js" %}></script>
+<!-- <script src={% static "uiapp/js/load_virtualjoystick.js" %}></script> -->
+<script src={% static "uiapp/js/top_bar_statuses_update.js" %}></script>
+<script src={% static "uiapp/js/speech_recognition.js" %}></script>
+
+{% elif page == 'smarthomeui' %}
+<script src={% static "uiapp/js/speech_recognition.js" %}></script>
+
+{% elif page == 'healthdata' %}
 <script src={% static "uiapp/js/speech_recognition.js" %}></script>
 
 {% elif page == 'navigation' %}
@@ -38,35 +57,39 @@
 <script src={% static "roslibjs/roslib.min.js" %}></script>
 <script src={% static "roslibjs/ros2d.js" %}></script>
 
-<!-- !!! INSTEAD OF  -->
+
 <script>
     var statusmsg = 'empty';
     var ros = new ROSLIB.Ros();
     ros.connect('ws://{{ fqdn }}:9090');
     // ros.connect('ws://127.0.0.1:9090');
-
+    
     ros.on('connection', function () {
         console.log('Connected to websocket server.');
         document.getElementById("status").innerHTML = "Connected";
     });
-
+    
     ros.on('error', function (error) {
         console.log('Error connecting to websocket server: ', error);
     });
-
+    
     ros.on('close', function () {
         console.log('Connection to websocket server closed.');
     });
     ros.on('connection', function () {
-
+        
     });
-
+    
     // ###################################
     </script>
+<!-- !!! INSTEAD OF  -->
 <!-- <script src={% static "roslibjs/nav2d.js" %}></script> -->
 <!-- !!! IN MELODIC USE THE MODIFIED BY STEFAN nav2djs -> nav2d_modified_for_tf2.js -->
 <script src={% static "roslibjs/nav2d_modified_for_tf2.js" %}></script>
 
+<!-- <script src={% static "uiapp/js/speech_recognition.js" %}></script> -->
+
+<!-- // ##########  END Navigation realted ######################### -->
 
 
 
@@ -117,5 +140,7 @@
 </script>
 
 <script src={% static "uiapp/js/nav_waypoint_menu.js" %}></script>{% else %} -->
+
+
 
 {% endif %}

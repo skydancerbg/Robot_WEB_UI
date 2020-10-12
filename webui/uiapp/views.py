@@ -38,12 +38,12 @@ def teleopv1(request):
       'sim': active_sim }
     return render(request, 'teleopv1.html', context)
     
-def tasks(request):
+def actionsandtasks(request):
     context = {
       'fqdn': request.get_host().rsplit(':', 1)[0],
-      'page': "tasks",
+      'page': "actionsandtasks",
       'sim': active_sim }
-    return render(request, 'tasks.html', context)
+    return render(request, 'actionsandtasks.html', context)
 
 # def navigation(request):
 #     context = {'fqdn': request.get_host().rsplit(':', 1)[0],
@@ -60,9 +60,16 @@ def smarthomeui(request):
 def healthdata(request):
     context = {
       'fqdn': request.get_host().rsplit(':', 1)[0],
-      'page': "smarthomeui",
+      'page': "healthdata",
       'sim': active_sim }
     return render(request, 'healthdata.html', context)
+
+def about(request):
+    context = {
+      'fqdn': request.get_host().rsplit(':', 1)[0],
+      'page': "about",
+      'sim': active_sim }
+    return render(request, 'about.html', context)
 
 # def navigation(request):
 #     context = {'fqdn': request.get_host().rsplit(':', 1)[0] }

@@ -5,8 +5,11 @@
 {% block nav_dashboard %}class="nav-item"{% endblock %}
 {% block nav_teleop %}class="nav-item"{% endblock %}
 {% block nav_navigation %}class="nav-item active"{% endblock %}
+{% block nav_actionsandtasks %}class="nav-item"{% endblock %}
 {% block nav_smarthome %}class="nav-item"{% endblock %}
 {% block nav_health %}class="nav-item"{% endblock %}
+{% block nav_about %}class="nav-item"{% endblock %}
+
 
 {% block page_content %}
 
@@ -18,7 +21,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-center text-gray-800">NAVIGARION</h1>
+            <h1 class="h3 mb-0 text-center text-gray-800">NAVIGATION</h1>
             <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
         </div>
@@ -246,6 +249,7 @@
 <!-- <script src={% static "roslibjs/nav2d.js" %}></script> -->
 <!-- !!! IN MELODIC USE THE MODIFIED BY STEFAN nav2djs -> nav2d_modified_for_tf2.js -->
 <script src={% static "roslibjs/nav2d_modified_for_tf2.js" %}></script>
+<script src={% static "uiapp/js/speech_recognition.js" %}></script>
 
 <script>
     var statusmsg = 'empty';

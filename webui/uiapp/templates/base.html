@@ -74,7 +74,7 @@
 
             <!-- Nav Item - Teleop control -->
             <li {% block nav_teleop %}{% endblock %}>
-                <a class="nav-link" href="/teleop/">
+                <a id ='teleop_nav_id' class="nav-link teleop_nav_link" href="/teleop/">
                     <i class="fas fa-fw fa-robot"></i>
                     <span>Telecontrol</span></a>
             </li>
@@ -90,10 +90,10 @@
             </li>
 
             <!-- Nav Item - Navigation control -->
-            <li {% block nav_tasks %}{% endblock %}>
-                <a class="nav-link" href="/tasks/">
+            <li {% block nav_actionsandtasks %}{% endblock %}>
+                <a class="nav-link" href="/actionsandtasks/">
                     <i class="fas fa-fw fa-map"></i>
-                    <span>Predefined tasks</span></a>
+                    <span>Actions and tasks</span></a>
             </li>
 
             <!-- Divider -->
@@ -104,7 +104,7 @@
             <li {% block nav_smarthome %}{% endblock %}>
                 <a class="nav-link" href="/smarthome/">
                     <i class="fas fa-fw fa-home"></i>
-                    <span>Smarthome</span></a>
+                    <span>Smart home</span></a>
             </li>
 
             <!-- Divider -->
@@ -115,11 +115,36 @@
             <li {% block nav_health %}{% endblock %}>
                 <a class="nav-link" href="/healthdata/">
                     <i class="fas fa-fw fa-stethoscope"></i>
-                    <span>Your health data</span></a>
+                    <span>My health data</span></a>
             </li>
 
 
             <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <!-- <div class="sidebar-heading">
+                Help
+            </div> -->
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHelp"
+                    aria-expanded="true" aria-controls="collapseHelp">
+                    <i class="fas fa-fw fa-question-circle"></i>
+                    <span>HELP</span>
+                </a>
+                <div id="collapseHelp" class="collapse" aria-labelledby="headingHelp" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Help topics:</h6>
+                        <a class="collapse-item" href="helpvoicecommands.html">List of voice commands</a>
+                        <a class="collapse-item" href="helpabout.html">About</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
             <hr class="sidebar-divider">
 
             <!-- Heading -->
@@ -165,7 +190,20 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
-            <br><br><br>
+            <br>
+            
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Smart home page -->
+
+            <li {% block nav_about %}{% endblock %}>
+                <a class="nav-link" href="/about/">
+                    <i class="fas fa-fw fa-info-circle"></i>
+                    <span>About</span></a>
+            </li>
+
+<br><br>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

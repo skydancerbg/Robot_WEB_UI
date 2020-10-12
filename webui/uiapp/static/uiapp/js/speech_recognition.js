@@ -1,3 +1,66 @@
+var cmdVel = new ROSLIB.Topic({
+    ros: ros,
+    name: '/archie/cmd_vel',
+    // name: '/cmd_vel',
+    // name: '/servicebot/cmd_vel',
+    // name: '/cmd_vel_mux/input/teleop',
+    messageType: 'geometry_msgs/Twist'
+});
+
+function executeSpeechMovementCommand(dx, dz) {
+    var twist = new ROSLIB.Message({
+        linear: {
+            x: dx,
+            y: 0,
+            z: 0
+        },
+        angular: {
+            x: 0,
+            y: 0,
+            z: dz
+        }
+    });
+    console.log("before publish twist")
+    cmdVel.publish(twist);
+    console.log("after publish twist")
+
+    setTimeout(function () {
+        var twist = new ROSLIB.Message({
+            linear: {
+                x: 0,
+                y: 0,
+                z: 0
+            },
+            angular: {
+                x: 0,
+                y: 0,
+                z: 0
+            }
+        });
+        console.log("before publish stop twist")
+        cmdVel.publish(twist);
+        console.log("after publish stop twist")
+    }, 2000); // duration of movement
+}
+
+$(document).ready(function ($) {
+
+    // Enable F4 to be used as keyboard Speech recognition activation button
+    $('body').on('keydown', function (e) {
+        // F4 key is available to use for turning on the 
+        // microphone for voice recognition in Google chrome browser
+        // When F4 is pressed, the event.key is F4 event.code is F4
+        // event.which is 114 event.location is 0  (general keys)
+        // Keydown or Keyup events should be used.
+        // The Keypress event will not react on special keys...
+        if (e.key == "F4") {
+            // Send click event to the mic icon in the topbar
+            $("#mic_click_span").trigger('click');
+        }
+    })
+
+});
+
 $("#mic_click_span").on('click', startSpeechRecognition);
 
 function startSpeechRecognition() {
@@ -10,24 +73,23 @@ function startSpeechRecognition() {
         $("#mic_click_span").off('click');
         recognition.continuous = false;
         recognition.interimResults = false;
-        // recognition.lang = "en-EN";
-        recognition.lang = "bg-BG";
+        // recognition.interimResults = true;
+        recognition.lang = "en-EN";
+        // recognition.lang = "bg-BG";
         recognition.start();
-        document.getElementById('transcript').value = "Speak now!";
+        // document.getElementById('transcript').value = "Speak now!";
+        $("#transcript")[0].value = "Speak now!";
         recognition.onresult = function (e) {
             var recognized_string;
             recognized_string = e.results[0][0].transcript;
             console.log(e.results[0][0].transcript);
             console.log('recognized string is: ' + recognized_string);
-            document.getElementById('transcript').value = ("Recognized:  " + recognized_string);
-            // document.getElementById('transcript').value = e.results[0][0].transcript;
-            // speechStringVar = recognized_text;
+            // document.getElementById('transcript').value = (recognized_string);
+            $("#transcript")[0].value = (recognized_string);
             recognition.stop();
-            // $("#mic_span_div")[0].innerHTML = '<span class="input-group-addon btn btn-lg btn-outline-secondary btn-circle onclick="startSpeechRecognition();"><i class="fas fa-microphone-alt-slash fa-2x"></i></span>';
-            // $("#mic_span_div")[0].innerHTML = '<i class="fas fa-microphone-alt-slash fa-2x">';
             $("#mic_span")[0].innerHTML = '<span class="input-group-addon btn btn-lg btn-outline-secondary btn-circle "><i class="fas fa-microphone-alt-slash fa-2x"></i></span>';
             $("#mic_click_span").on('click', startSpeechRecognition);
-            // checkCommand(speechStringVar);
+            checkSpeechCommand(recognized_string);
         };
         recognition.onerror = function (e) {
             console.log("speech recognition error!")
@@ -39,44 +101,66 @@ function startSpeechRecognition() {
     }
 }
 
+// if ($("#dashboard_page_content").length) {
+//     // alert('no virtual joystick container');
+//     console.log('Skipping load nav map, no container on the page!');
+// } else {
 
-function checkCommand(str) {
-    if (str.includes("ръката") && str.includes("напред")) {
-        armvar = [0.0, 50.0, -50.0, 0.0, 0.0, 0.0];
-        sendArmCommand(armvar);
-    } else if (str.includes("ръката") && str.includes("назад")) {
-        armvar = [0.0, -50.0, 50.0, 0.0, 0.0, 0.0];
-        sendArmCommand(armvar);
-    } else if (str.includes("ръката") && str.includes("наляво")) {
-        armvar = [50.0, 0.0, 0.0, 0.0, 0.0, 0.0];
-        sendArmCommand(armvar);
-    } else if (str.includes("ръката") && str.includes("надясно")) {
-        armvar = [-50.0, 0.0, 0.0, 0.0, 0.0, 0.0];
-        sendArmCommand(armvar);
-    } else if (str.includes("ръката нагоре")) {
-        armvar = [0.0, 0.0, -50.0, 50.0, 0.0, 0.0];
-        sendArmCommand(armvar);
-    } else if (str.includes("ръката надолу")) {
-        armvar = [0.0, 0.0, 50.0, -50.0, 0.0, 0.0];
-        sendArmCommand(armvar);
-    } else if (str.includes("робот") && str.includes("напред")) {
-        sendButtonCommand(0.4, 0);
-    } else if (str.includes("робот") && str.includes("назад")) {
-        sendButtonCommand(-0.4, 0);
-    } else if (str.includes("робот") && str.includes("наляво")) {
-        sendButtonCommand(0, 0.6);
-    } else if (str.includes("робот") && str.includes("надясно")) {
-        sendButtonCommand(0, -0.6);
-    } else if (str.includes("включване на ръката")) {
-        sendCommand("Connect");
-    } else if (str.includes("рестартиране на ръката")) {
-        sendCommand("Reset");
-    } else if (str.includes("пускане на ръката")) {
-        sendCommand("Enable");
-    } else if (str.includes("хвани")) {
-        sendCommand("GripperClose");
-    } else if (str.includes("пусни")) {
-        sendCommand("GripperOpen");
+function checkSpeechCommand(str) {
+
+    // Voice control of the page menu
+    if (str.includes("open") && str.includes("dashboard") && str.includes("page")) {
+        window.location.href = "/dashboard/";
+    } else if (str.includes("open") && str.includes("telecontrol") && str.includes("page")) {
+        window.location.href = "/teleop/";
+    } else if (str.includes("open") && str.includes("teleop") && str.includes("page")) {
+        window.location.href = "/teleop/";
+    } else if (str.includes("open") && str.includes("autonomous") && str.includes("navigation") && str.includes("page")) {
+        window.location.href = "/navigation/";
+    } else if (str.includes("open") && str.includes("navigation") && str.includes("page")) {
+        window.location.href = "/navigation/";
+    } else if (str.includes("open") && (str.includes("actions") || str.includes("action")) && str.includes("page")) {
+        window.location.href = "/actionsandtasks/";
+    } else if (str.includes("open") && str.includes("tasks") && str.includes("page")) {
+        window.location.href = "/actionsandtasks/";
+    } else if (str.includes("open") && str.includes("Smart") && str.includes("home") && str.includes("page")) {
+        window.location.href = "/smarthome/";
+    } else if (str.includes("open") && str.includes("health") && str.includes("data") && str.includes("page")) {
+        window.location.href = "/healthdata/";
+    }
+
+    // Page specific voice controls
+
+    if ($("#dashboard_page_content").length) {
+        console.log('checkSpeechCommand: dashboard_page detected!');
+        if (str.includes("robot") && str.includes("go") && str.includes("forward")) {
+            executeSpeechMovementCommand(0.4, 0);
+        } else if (str.includes("robot") && str.includes("go") && str.includes("straight")) {
+            executeSpeechMovementCommand(0.6, 0);
+        } else if (str.includes("robot") && str.includes("go") && str.includes("backwards")) {
+            executeSpeechMovementCommand(-0.4, 0);
+        } else if (str.includes("robot") && str.includes("go") && str.includes("back")) {
+            executeSpeechMovementCommand(-0.4, 0);
+        } else if (str.includes("robot") && str.includes("turn") && str.includes("left")) {
+            executeSpeechMovementCommand(0, 0.6);
+        } else if (str.includes("robot") && str.includes("turn") && str.includes("right")) {
+            executeSpeechMovementCommand(0, -0.6);
+        }
+    } else if ($("#teleop_page_content").length) {
+        console.log('checkSpeechCommand: teleop_page detected!');
+        if (str.includes("robot") && str.includes("go") && str.includes("forward")) {
+            executeSpeechMovementCommand(0.4, 0);
+        } else if (str.includes("robot") && str.includes("go") && str.includes("straight")) {
+            executeSpeechMovementCommand(0.4, 0);
+        } else if (str.includes("robot") && str.includes("go") && str.includes("backwards")) {
+            executeSpeechMovementCommand(-0.4, 0);
+        } else if (str.includes("robot") && str.includes("go") && str.includes("back")) {
+            executeSpeechMovementCommand(-0.4, 0);
+        } else if (str.includes("robot") && str.includes("turn") && str.includes("left")) {
+            executeSpeechMovementCommand(0, 0.6);
+        } else if (str.includes("robot") && str.includes("turn") && str.includes("right")) {
+            executeSpeechMovementCommand(0, -0.6);
+        }
+    } else if ($("#teleop_page_content").length) {
     }
 }
-
