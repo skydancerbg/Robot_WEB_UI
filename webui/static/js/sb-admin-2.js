@@ -2,7 +2,19 @@
   "use strict"; // Start of use strict
 
   // Toggle the side navigation
-  $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
+  // $("#sidebarToggle, #sidebarToggleTop").on('click', function(e) {
+  //   console.log("sidebar toggle function");
+  //   $("body").toggleClass("sidebar-toggled");
+  //   $(".sidebar").toggleClass("toggled");
+  //   if ($(".sidebar").hasClass("toggled")) {
+  //     $('.sidebar .collapse').collapse('hide');
+  //   };
+  // });
+  // TODO Event not firing on #sidebarToggleTop
+  // Reducing the code here and moving the #sidebarToggleTop
+  // click event listener to sidebar_top_toggle.js -....where it works...???
+  $("#sidebarToggle").on('click', function(e) {
+    console.log("sb-aadmin-2.js: sidebar toggle function");
     $("body").toggleClass("sidebar-toggled");
     $(".sidebar").toggleClass("toggled");
     if ($(".sidebar").hasClass("toggled")) {
@@ -15,7 +27,9 @@
     if ($(window).width() < 768) {
       $('.sidebar .collapse').collapse('hide');
     };
+    console.log("sb-aadmin-2.js: sidebar toggle $(window).resize(function()");
     
+    // TODO this is not working as well????????????????????
     // Toggle the side navigation when window is resized below 480px
     if ($(window).width() < 480 && !$(".sidebar").hasClass("toggled")) {
       $("body").addClass("sidebar-toggled");

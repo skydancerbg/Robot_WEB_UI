@@ -1,27 +1,3 @@
-// ****** TEST *********
-var my_listener = new ROSLIB.Topic({
-    ros: ros,
-    // name: '/robotis/status',
-    name: '/archie/status',
-    messageType: 'robotis_controller_msgs/StatusMsg'
-});
-
-my_listener.subscribe(function (message) {
-    // https://stackoverflow.com/questions/53676731/roslibjs-subscribe-to-topic-with-custom-messages
-    console.log("Poluchi message!!!!");
-    console.log(message.module_name);
-    console.log(message.status_msg);
-    console.log(message.type);
-    // console.log(m.data);
-    //console.log(`Received message on'  ${listener.name}: ${JSON.stringify(message)}`);
-    // document.getElementById("msg").innerHTML = m.data;
-
-    // document.getElementById("msg").innerHTML = message.status_msg;
-
-    statusmsg = message.status_msg;
-
-});
-// ****** END TEST *********
 
 // ****** robot_status *********
 var robot_status_listener = new ROSLIB.Topic({

@@ -6,7 +6,10 @@
 
     <!-- Topbar -->
     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
+        <!-- Sidebar Toggle (Topbar) -->
+        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+        </button>
         <!-- <button type="button" class="btn btn-default btn-circle"><i class="fa fa-unlink"></i> -->
         <div class="row" id="ros_connection_status">
             <button type="button" class="btn btn-outline-secondary btn-box"><i class="fas fa-unlink fa-2x"></i>
@@ -50,7 +53,7 @@
                     <div id="voice_commands">
                         <input type="text" name="voice_input" id="transcript" placeholder="Press the mic to command!" />
                         <!-- <span id="mic_click_span" onclick="startSpeechRecognition();"> -->
-                        <span id="mic_click_span" >
+                        <span id="mic_click_span">
                             <span id="mic_span" class="input-group-addon btn btn-lg btn-outline-secondary btn-circle">
                                 <i class="fas fa-microphone-alt-slash fa-2x"></i>
                             </span>
@@ -66,13 +69,13 @@
                 </a>
             </li>
 
-                <!-- Nav Item - EMPTY SPOT -->
+            <!-- Nav Item - EMPTY SPOT -->
             <li class="nav-item dropdown no-arrow mx-1">
                 <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <!-- EMPTY SPOT ON THE TOP BAR -->
                 </a>
-            </li> 
+            </li>
             <!-- ############################ -->
 
             <!-- Nav Item - Alerts -->

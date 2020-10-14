@@ -22,6 +22,7 @@
 <script defer src={% static "roslibjs/nav2d_modified_for_tf2.js" %}></script>
 <script defer src={% static "uiapp/js/connect_ros.js" %}></script>
 <script defer src={% static "uiapp/js/nav_map.js" %}></script>
+<script defer src={% static "uiapp/js/sidebar_top_toggle.js" %}></script>
 <script>
 
 </script>
@@ -34,6 +35,8 @@
 <script src={% static "uiapp/js/top_bar_statuses_update.js" %}></script>
 <script src={% static "uiapp/js/speech_recognition.js" %}></script>
 <script src={% static "uiapp/js/mouse_hover_btn_joystick.js" %}></script>
+<script defer src={% static "uiapp/js/sidebar_top_toggle.js" %}></script>
+
 
 {% elif page == 'actionsandtasks' %}
 <!-- <script src={% static "virtualjoystick/virtualjoystick.js" %}></script> -->
@@ -41,12 +44,16 @@
 <!-- <script src={% static "uiapp/js/load_virtualjoystick.js" %}></script> -->
 <script src={% static "uiapp/js/top_bar_statuses_update.js" %}></script>
 <script src={% static "uiapp/js/speech_recognition.js" %}></script>
+<script defer src={% static "uiapp/js/sidebar_top_toggle.js" %}></script>
+<script defer src={% static "uiapp/js/op3_commands.js" %}></script>
 
 {% elif page == 'smarthomeui' %}
 <script src={% static "uiapp/js/speech_recognition.js" %}></script>
+<script defer src={% static "uiapp/js/sidebar_top_toggle.js" %}></script>
 
 {% elif page == 'healthdata' %}
 <script src={% static "uiapp/js/speech_recognition.js" %}></script>
+<script defer src={% static "uiapp/js/sidebar_top_toggle.js" %}></script>
 
 {% elif page == 'navigation' %}
 <!-- <script src={% static "webrtc/signaling_channel.js" %}></script>
@@ -56,6 +63,7 @@
 <script src={% static "roslibjs/eventemitter2.min.js" %}></script>
 <script src={% static "roslibjs/roslib.min.js" %}></script>
 <script src={% static "roslibjs/ros2d.js" %}></script>
+<script defer src={% static "uiapp/js/sidebar_top_toggle.js" %}></script>
 
 
 <script>

@@ -20,7 +20,7 @@ var ros = new ROSLIB.Ros();
         console.log('Connected to websocket server.');
         if ($("#dashboard_page_content").length != 0) {
             // We are on the Dasboard pageXOffset, topbar is diferent here. process accordingly
-            console.log('connect_ros.js: dashboard page');
+            // console.log('connect_ros.js: dashboard page');
 
             // var contents = $('#contents');  //returns a jQuery Object
             // var contents = $('#contents')[0]; //the first element of the object returns a HTML DOM Object
@@ -36,7 +36,7 @@ var ros = new ROSLIB.Ros();
             $("#battery_status")[0].innerHTML = '<i class="fas fa-battery-empty fa-2x blink_it" style="color:red;"></i>';
             $("#wifi_status")[0].innerHTML = '<i class="fas fa-wifi fa-2x" style="color:rgb(123, 230, 123);"></i>';
             $("#smarthome_status")[0].innerHTML = '<i class="fas fa-home fa-2x  " style="color:rgb(123, 230, 123);" ></i>';
-            console.log('connect_ros.js: not a dashboard page')
+            // console.log('connect_ros.js: not a dashboard page')
         }
 
     });
